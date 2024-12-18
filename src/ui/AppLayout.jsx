@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
+import Player from "./Player";
 
 function AppLayout() {
   return (
@@ -9,6 +10,7 @@ function AppLayout() {
         <Container>
           <Outlet />
         </Container>
+        <Player />
       </main>
     </div>
   );
@@ -16,7 +18,7 @@ function AppLayout() {
 
 function Container({ children }) {
   return (
-    <div className="bg-brand-975 min-h-screen p-10 md:p-14">{children}</div>
+    <div className="min-h-screen bg-brand-975 p-10 md:p-14">{children}</div>
   );
 }
 

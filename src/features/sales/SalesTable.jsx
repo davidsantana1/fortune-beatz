@@ -4,7 +4,7 @@ import SalesRow from "./SalesRow";
 
 const fakeSales = [
   {
-    name: "Hola",
+    name: "Incomprendida",
     price: 350,
     date: "Oct 20 2024",
     buyer: "Miguel Martinez",
@@ -12,7 +12,7 @@ const fakeSales = [
     paymentMethod: "paypal",
   },
   {
-    name: "Adios",
+    name: "Connect",
     price: 25,
     date: "Nov 12 2024",
     buyer: "Clara Perez",
@@ -21,7 +21,7 @@ const fakeSales = [
   },
 
   {
-    name: "Hola",
+    name: "Cuarentena",
     price: 55,
     date: "Oct 20 2024",
     buyer: "Miguel Martinez",
@@ -29,7 +29,7 @@ const fakeSales = [
     paymentMethod: "paypal",
   },
   {
-    name: "Bye",
+    name: "Horas",
     price: 500,
     date: "Dec 14 2024",
     buyer: "Michael Cruz",
@@ -37,7 +37,7 @@ const fakeSales = [
     paymentMethod: "credit",
   },
   {
-    name: "Bye",
+    name: "Tiempo",
     price: 350,
     date: "Dec 14 2024",
     buyer: "Michael Cruz",
@@ -45,7 +45,7 @@ const fakeSales = [
     paymentMethod: "credit",
   },
   {
-    name: "Hola",
+    name: "Modelo",
     price: 25,
     date: "Oct 20 2024",
     buyer: "Miguel Martinez",

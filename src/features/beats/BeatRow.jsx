@@ -11,7 +11,7 @@ function BeatRow({ beat }) {
   const { id: beatId, name, bpm, key, type, time, genre, image } = beat;
   const { isDeleting, deleteBeat } = useDeleteBeat();
   return (
-    <tr className="cursor-pointer hover:bg-brand-600">
+    <tr className="cursor-pointer transition-all hover:bg-brand-600">
       <TableItem as="td" isImage={true}>
         <img
           className="aspect-square max-w-20 object-cover"

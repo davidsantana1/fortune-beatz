@@ -7,7 +7,6 @@ import Error from "../../ui/Error";
 
 function BeatTable() {
   const { isPending, beats, error } = useBeats();
-  console.log(error);
 
   if (isPending) return <Spinner />;
   if (error) return <Error errorMessage={error.message} />;

@@ -53,3 +53,37 @@ li a:hover {
 a.active svg {
   @apply stroke-brand-500;
 }
+
+.rhap_container {
+  @apply bg-brand-950 text-brand-50;
+}
+
+.rhap_controls-section {
+  @apply text-brand-50;
+}
+
+.rhap_progress-section {
+  @apply pt-1;
+}
+
+.rhap_main-controls-button svg {
+  @apply h-full w-full text-brand-50;
+}
+.rhap_progress-filled,
+.rhap_progress-indicator {
+  @apply bg-brand-50;
+}
+
+.rhap_button-clear.rhap_volume-button {
+  @apply text-brand-50;
+}
+
+.rhap_time,
+.rhap_repeat-button {
+  @apply text-brand-50;
+}
+
+.rhap_volume-bar,
+.rhap_volume-indicator {
+  @apply bg-brand-50;
+}

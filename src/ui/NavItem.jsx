@@ -2,11 +2,11 @@ import { cloneElement } from "react";
 import Heading from "./Heading";
 import { NavLink } from "react-router-dom";
 
-function NavItem({ to, title, icon }) {
+function NavItem({ to, title, icon, ...props }) {
   return (
-    <li className="w-full">
+    <li className="w-full" {...props}>
       <NavLink
-        className="hover:bg-brand-975 flex w-full items-center justify-center gap-3 rounded-md px-12 py-2"
+        className="flex w-full items-center justify-center gap-3 rounded-md px-12 py-2 transition-all hover:bg-brand-975"
         to={to}
       >
         {cloneElement(icon, {

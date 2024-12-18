@@ -5,7 +5,7 @@ import { USDollar } from "../../utils/helpers";
 function SalesRow({ sale }) {
   const { name, price, buyer, date, paymentMethod, licenseType } = sale;
   return (
-    <tr className="cursor-pointer hover:bg-brand-600">
+    <tr className="cursor-pointer transition-all hover:bg-brand-600">
       <TableItem as="td">{name}</TableItem>
       <TableItem as="td">{buyer}</TableItem>
       <TableItem as="td">{date}</TableItem>

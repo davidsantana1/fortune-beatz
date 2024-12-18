@@ -58,7 +58,7 @@ function CreateBeatForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
       <Heading size="md">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 text-xl sm:text-3xl">
           {isEditSession ? <HiPencil /> : <HiMiniPlusCircle size="1.6rem" />}
           {isEditSession ? "Edit" : "Create"} Beat
         </div>
