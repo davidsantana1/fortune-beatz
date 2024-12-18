@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scrollbar-color: theme("colors.brand.700") theme("colors.brand.950");
+  }
+}
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: theme("colors.brand.700");
+}
+
+@layer utilities {
+  .bg-loading {
+    background:
+      radial-gradient(farthest-side, theme("colors.brand.500") 94%, #0000)
+        top/10px 10px no-repeat,
+      conic-gradient(#0000 30%, theme("colors.brand.500"));
+  }
+
+  .mask-loading {
+    -webkit-mask: radial-gradient(
+      farthest-side,
+      #0000 calc(100% - 10px),
+      #000 0
+    );
+    mask: radial-gradient(farthest-side, #0000 calc(100% - 10px), #000 0);
+  }
+}
+
+a.active span,
+li a:hover {
+  span {
+    @apply text-brand-50 transition-all;
+  }
+
+  svg {
+    @apply stroke-brand-500 transition-all;
+  }
+}
+
+.active {
+  @apply bg-brand-965;
+  span {
+    @apply text-brand-50;
+  }
+}
+
+a.active svg {
+  @apply stroke-brand-500;
+}
