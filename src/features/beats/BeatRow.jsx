@@ -7,30 +7,46 @@ import CreateBeatForm from "./CreateBeatForm";
 import { convertSecondsToMinutes } from "../../utils/helpers";
 import { useDeleteBeat } from "./useDeleteBeat";
 import { useAudioPlayer } from "../../context/AudioPlayerContext";
+import { HiPlayCircle } from "react-icons/hi2";
 
-function BeatRow({ beat }) {
-  const { setCurrentBeat } = useAudioPlayer();
-  const { id: beatId, name, bpm, key, type, time, genre, image } = beat;
+function BeatRow({ beat, number }) {
+  const { setCurrentBeat, currentBeat } = useAudioPlayer();
+  const { id: beatId, name, bpm, key, type, time, genre, image, audio } = beat;
   const { isDeleting, deleteBeat } = useDeleteBeat();
 
-  let audioSrc;
+  function handlePlay(event) {
+    if (
+      event.target.closest("button") ||
+      event.target.closest(".modal-window")
+    ) {
+      return;
+    }
 
-  if (name === "Horas") audioSrc = "/horas-20330442.mp3";
-  if (name === "Connect") audioSrc = "/connect-249553.mp3";
+    if (audio === currentBeat) setCurrentBeat("a");
+    setTimeout(() => {
+      setCurrentBeat(audio);
+    }, 0);
+  }
 
   return (
     <tr
-      onClick={() => {
-        setCurrentBeat(audioSrc);
-      }}
-      className="cursor-pointer transition-all hover:bg-brand-600"
+      onClick={handlePlay}
+      className="group cursor-pointer transition-all hover:bg-brand-600"
     >
+      <TableItem as="td">
+        <span className="font-semibold group-hover:hidden">{number}</span>
+        <HiPlayCircle className="hidden group-hover:flex" size={20} />
+      </TableItem>
       <TableItem as="td" isImage={true}>
-        <img
-          className="aspect-square max-w-20 object-cover"
-          src={image}
-          alt="Beat Image"
-        />
+        <div className="p-2">
+          <div className="max-w-20 overflow-hidden rounded-md bg-red-500">
+            <img
+              className="aspect-square max-w-20 object-cover"
+              src={image}
+              alt="Beat Image"
+            />
+          </div>
+        </div>
       </TableItem>
       <TableItem as="td">{name}</TableItem>
       <TableItem as="td">{type}</TableItem>

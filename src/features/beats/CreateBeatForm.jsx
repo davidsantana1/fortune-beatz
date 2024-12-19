@@ -3,6 +3,7 @@ import Heading from "../../ui/Heading";
 import Label from "../../ui/Label";
 import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
+import SpinnerMini from "../../ui/SpinnerMini";
 import { useForm } from "react-hook-form";
 import FormError from "../../ui/FormError";
 import { HiMiniPlusCircle, HiPencil } from "react-icons/hi2";
@@ -28,13 +29,15 @@ function CreateBeatForm({
 
   function onSubmit(data) {
     const image = typeof data.image === "string" ? data.image : data.image[0];
+    console.log(data);
+    const audio = typeof data.audio === "string" ? data.audio : data.audio[0];
 
     console.log(data);
     if (!data) return;
 
     if (isEditSession) {
       editBeat(
-        { newBeatData: { ...data, image }, id: editId },
+        { newBeatData: { ...data, image, audio }, id: editId },
         {
           onSuccess: () => {
             reset();
@@ -44,7 +47,7 @@ function CreateBeatForm({
       );
     } else {
       createBeat(
-        { ...data, image: image },
+        { ...data, image: image, audio: audio },
         {
           onSuccess: () => {
             reset();
@@ -120,13 +123,15 @@ function CreateBeatForm({
         disabled={isWorking}
       />
 
-      <div className="grid grid-cols-2">
+      <div className="grid sm:grid-cols-2">
         <div>
           <div className="flex items-center gap-4">
             <Label htmlFor="image">Image</Label>
             <FormError error={errors?.image?.message} />
           </div>
           <FileInput
+            type="file"
+            accept="image/*"
             disabled={isWorking}
             id="image"
             {...register("image", {
@@ -134,27 +139,27 @@ function CreateBeatForm({
             })}
           />
         </div>
-        {!isEditSession && (
-          <div>
-            <div className="flex items-center gap-4">
-              <Label htmlFor="beat">Beat</Label>
-              <FormError error={errors?.beat?.message} />
-            </div>
-            <FileInput
-              disabled={isWorking}
-              id="beat"
-              {...register("beat", {
-                required: isEditSession ? false : "This field is required",
-              })}
-            />
+        <div>
+          <div className="flex items-center gap-4">
+            <Label htmlFor="audio">Beat</Label>
+            <FormError error={errors?.audio?.message} />
           </div>
-        )}
+          <FileInput
+            type="file"
+            accept="audio/*"
+            disabled={isWorking}
+            id="audio"
+            {...register("audio", {
+              required: isEditSession ? false : "This field is required",
+            })}
+          />
+        </div>
       </div>
 
       <Input className="hidden" id="time" {...register("time")} value={154} />
 
-      <Button align="right" size="lg">
-        {isEditSession ? "Edit" : "Create"}
+      <Button align="right" size="lg" disabled={isWorking}>
+        {isWorking ? <SpinnerMini /> : isEditSession ? "Edit" : "Create"}
       </Button>
     </form>
   );
