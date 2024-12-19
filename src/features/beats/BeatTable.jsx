@@ -14,6 +14,7 @@ function BeatTable() {
   return (
     <Table>
       <Table.Header>
+        <TableItem className="w-48 sm:w-14">#</TableItem>
         <TableItem isImage={true}></TableItem>
         <TableItem>Name</TableItem>
         <TableItem>Artist Type</TableItem>
@@ -25,7 +26,9 @@ function BeatTable() {
       </Table.Header>
       <Table.Body
         data={beats}
-        render={(beat) => <BeatRow beat={beat} key={beat.id} />}
+        render={(beat, index) => (
+          <BeatRow number={index + 1} beat={beat} key={beat.id} />
+        )}
       />
     </Table>
   );
