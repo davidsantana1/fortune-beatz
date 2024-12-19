@@ -6,12 +6,25 @@ import { HiPencil, HiTrash } from "react-icons/hi2";
 import CreateBeatForm from "./CreateBeatForm";
 import { convertSecondsToMinutes } from "../../utils/helpers";
 import { useDeleteBeat } from "./useDeleteBeat";
+import { useAudioPlayer } from "../../context/AudioPlayerContext";
 
 function BeatRow({ beat }) {
+  const { setCurrentBeat } = useAudioPlayer();
   const { id: beatId, name, bpm, key, type, time, genre, image } = beat;
   const { isDeleting, deleteBeat } = useDeleteBeat();
+
+  let audioSrc;
+
+  if (name === "Horas") audioSrc = "/horas-20330442.mp3";
+  if (name === "Connect") audioSrc = "/connect-249553.mp3";
+
   return (
-    <tr className="cursor-pointer transition-all hover:bg-brand-600">
+    <tr
+      onClick={() => {
+        setCurrentBeat(audioSrc);
+      }}
+      className="cursor-pointer transition-all hover:bg-brand-600"
+    >
       <TableItem as="td" isImage={true}>
         <img
           className="aspect-square max-w-20 object-cover"

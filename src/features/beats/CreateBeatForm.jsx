@@ -120,17 +120,36 @@ function CreateBeatForm({
         disabled={isWorking}
       />
 
-      <div className="flex items-center gap-4">
-        <Label htmlFor="image">Image</Label>
-        <FormError error={errors?.image?.message} />
+      <div className="grid grid-cols-2">
+        <div>
+          <div className="flex items-center gap-4">
+            <Label htmlFor="image">Image</Label>
+            <FormError error={errors?.image?.message} />
+          </div>
+          <FileInput
+            disabled={isWorking}
+            id="image"
+            {...register("image", {
+              required: isEditSession ? false : "This field is required",
+            })}
+          />
+        </div>
+        {!isEditSession && (
+          <div>
+            <div className="flex items-center gap-4">
+              <Label htmlFor="beat">Beat</Label>
+              <FormError error={errors?.beat?.message} />
+            </div>
+            <FileInput
+              disabled={isWorking}
+              id="beat"
+              {...register("beat", {
+                required: isEditSession ? false : "This field is required",
+              })}
+            />
+          </div>
+        )}
       </div>
-      <FileInput
-        disabled={isWorking}
-        id="image"
-        {...register("image", {
-          required: isEditSession ? false : "This field is required",
-        })}
-      />
 
       <Input className="hidden" id="time" {...register("time")} value={154} />
 
