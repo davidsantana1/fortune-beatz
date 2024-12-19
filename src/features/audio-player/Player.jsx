@@ -19,7 +19,8 @@ function Player() {
 
   if (beats) {
     playingIndex = beats.findIndex((beat) => beat.audio === currentBeat);
-    currentBeatName = beats.find((beat) => beat.audio === currentBeat).name;
+    currentBeatName =
+      beats?.find((beat) => beat?.audio === currentBeat)?.name ?? "";
   }
 
   function playNext() {
