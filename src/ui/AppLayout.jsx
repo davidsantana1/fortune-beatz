@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
-import Player from "./Player";
+import Player from "../features/audio-player/Player";
 
 function AppLayout() {
   return (
