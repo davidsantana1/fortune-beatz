@@ -33,7 +33,7 @@ const startData = [
 
 function SalesSummary() {
   return (
-    <div className="bg-brand-950 h-80 rounded-md p-6">
+    <div className="h-80 rounded-md bg-brand-950 p-6">
       <Heading size="sm" as="h2" margin="minimal">
         Sales Summary
       </Heading>
@@ -45,11 +45,10 @@ function SalesSummary() {
             ))}
           </Pie>
           <Legend
-            verticalAlign="middle"
-            align="right"
-            width="35%"
-            layout="vertical"
-            iconSize={15}
+            verticalAlign="bottom"
+            align="center"
+            layout="horizontal"
+            iconSize={10}
             iconType="circle"
           />
           <Tooltip contentStyle={{ backgroundColor: "#eefaff" }} />
