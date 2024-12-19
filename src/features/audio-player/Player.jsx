@@ -15,9 +15,12 @@ function Player() {
   const beats = queryClient.getQueryData(["beats"]);
 
   let playingIndex;
+  let currentBeatName;
 
-  if (beats)
+  if (beats) {
     playingIndex = beats.findIndex((beat) => beat.audio === currentBeat);
+    currentBeatName = beats.find((beat) => beat.audio === currentBeat).name;
+  }
 
   function playNext() {
     const nextIndex = playingIndex + 1;
@@ -29,7 +32,14 @@ function Player() {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 z-50 w-full bg-gray-800">
+    <div className="fixed bottom-0 left-0 z-50 w-full bg-brand-900">
+      {currentBeatName && (
+        <div className="py-2 text-center shadow-md">
+          <span className="font-bold text-brand-50">
+            Now Playing: {currentBeatName}
+          </span>
+        </div>
+      )}
       <AudioPlayer autoPlay onEnded={() => playNext()} src={currentBeat} />
     </div>
   );
