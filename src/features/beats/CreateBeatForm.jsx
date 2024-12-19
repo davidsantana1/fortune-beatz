@@ -123,7 +123,7 @@ function CreateBeatForm({
         disabled={isWorking}
       />
 
-      <div className="grid sm:grid-cols-2">
+      <div className="grid xl:grid-cols-2">
         <div>
           <div className="flex items-center gap-4">
             <Label htmlFor="image">Image</Label>

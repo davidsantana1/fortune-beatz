@@ -59,13 +59,21 @@ function BeatRow({ beat, number }) {
         <TableItem as="td">
           <div className="flex gap-4">
             <Modal.Open opens="edit">
-              <Button variant="secondary" size="lg">
+              <Button
+                aria-label={`Edit Beat ${name}`}
+                variant="secondary"
+                size="lg"
+              >
                 <HiPencil />
               </Button>
             </Modal.Open>
 
             <Modal.Open opens="delete">
-              <Button variant="danger" size="lg">
+              <Button
+                aria-label={`Delete Beat ${name}`}
+                variant="danger"
+                size="lg"
+              >
                 <HiTrash />
               </Button>
             </Modal.Open>
