@@ -29,10 +29,8 @@ function CreateBeatForm({
 
   function onSubmit(data) {
     const image = typeof data.image === "string" ? data.image : data.image[0];
-    console.log(data);
     const audio = typeof data.audio === "string" ? data.audio : data.audio[0];
 
-    console.log(data);
     if (!data) return;
 
     if (isEditSession) {
@@ -156,7 +154,7 @@ function CreateBeatForm({
         </div>
       </div>
 
-      <Input className="hidden" id="time" {...register("time")} value={154} />
+      {/* <Input className="hidden" id="time" {...register("time")} value={154} /> */}
 
       <Button align="right" size="lg" disabled={isWorking}>
         {isWorking ? <SpinnerMini /> : isEditSession ? "Edit" : "Create"}
