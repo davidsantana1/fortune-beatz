@@ -18,7 +18,7 @@ function AppLayout() {
 
 function Container({ children }) {
   return (
-    <div className="min-h-screen bg-brand-975 p-10 md:p-14">{children}</div>
+    <div className="min-h-screen bg-brand-975 p-6 md:p-14">{children}</div>
   );
 }
 

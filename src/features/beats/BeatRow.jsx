@@ -8,11 +8,43 @@ import { convertSecondsToMinutes } from "../../utils/helpers";
 import { useDeleteBeat } from "./useDeleteBeat";
 import { useAudioPlayer } from "../../context/AudioPlayerContext";
 import { HiPlayCircle } from "react-icons/hi2";
+import { useEffect } from "react";
+import { useState } from "react";
 
 function BeatRow({ beat, number }) {
+  const [time, setTime] = useState("");
   const { setCurrentBeat, currentBeat } = useAudioPlayer();
-  const { id: beatId, name, bpm, key, type, time, genre, image, audio } = beat;
   const { isDeleting, deleteBeat } = useDeleteBeat();
+
+  const { id: beatId, name, bpm, key, type, genre, image, audio } = beat;
+
+  const isPlaying = currentBeat === audio;
+
+  useEffect(() => {
+    async function getAudioDuration(audioSrc) {
+      return new Promise((resolve, reject) => {
+        const audioEl = new Audio(audioSrc);
+
+        audioEl.addEventListener("loadedmetadata", () => {
+          resolve(audioEl.duration);
+        });
+
+        audioEl.addEventListener("error", () => {
+          reject("Failed to load audio");
+        });
+      });
+    }
+
+    if (audio) {
+      getAudioDuration(audio)
+        .then((duration) => {
+          setTime(duration);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [audio]);
 
   function handlePlay(event) {
     if (
@@ -31,11 +63,16 @@ function BeatRow({ beat, number }) {
   return (
     <tr
       onClick={handlePlay}
-      className="group cursor-pointer transition-all hover:bg-brand-600"
+      className={`group cursor-pointer transition-all hover:bg-brand-600 ${isPlaying && "bg-brand-600"}`}
     >
       <TableItem as="td">
-        <span className="font-semibold group-hover:hidden">{number}</span>
-        <HiPlayCircle className="hidden group-hover:flex" size={20} />
+        {!isPlaying && (
+          <span className="font-semibold group-hover:hidden">{number}</span>
+        )}
+        <HiPlayCircle
+          className={`${isPlaying ? "flex" : "hidden"} group-hover:flex`}
+          size={20}
+        />
       </TableItem>
       <TableItem as="td" isImage={true}>
         <div className="p-2">

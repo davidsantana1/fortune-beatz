@@ -40,7 +40,11 @@ export async function createEditBeat(newBeat, id) {
   // B) EDIT
   if (id)
     query = query
-      .update({ ...newBeat, image: imagePath, audio: audioPath })
+      .update({
+        ...newBeat,
+        image: imagePath,
+        audio: audioPath,
+      })
       .eq("id", id);
 
   const { data, error } = await query.select().single();

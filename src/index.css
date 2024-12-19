@@ -67,23 +67,32 @@ a.active svg {
 }
 
 .rhap_main-controls-button svg {
-  @apply h-full w-full text-brand-50;
+  @apply h-full w-full text-brand-50 transition-all hover:text-brand-500;
 }
+
 .rhap_progress-filled,
 .rhap_progress-indicator {
-  @apply bg-brand-50;
+  @apply bg-brand-500 hover:bg-brand-600;
 }
 
 .rhap_button-clear.rhap_volume-button {
-  @apply text-brand-50;
+  @apply text-brand-50 hover:text-brand-500;
 }
 
 .rhap_time,
 .rhap_repeat-button {
-  @apply text-brand-50;
+  @apply text-brand-50 transition-all hover:text-brand-500;
 }
 
 .rhap_volume-bar,
 .rhap_volume-indicator {
-  @apply bg-brand-50;
+  @apply bg-brand-50 transition-all hover:bg-brand-500;
+}
+
+.rhap_forward-button svg {
+  @apply h-8 w-8 fill-brand-50 hover:fill-brand-500;
+}
+
+.rhap_rewind-button svg {
+  @apply h-8 w-8 fill-brand-50 hover:fill-brand-500;
 }
