@@ -1,19 +1,14 @@
-import AudioPlayer, { RHAP_UI } from "react-h5-audio-player";
-import "react-h5-audio-player/lib/styles.css";
+import AudioPlayer from "react-h5-audio-player";
 import { useAudioPlayer } from "../../context/AudioPlayerContext";
-import { useQueryClient } from "@tanstack/react-query";
 import { HiXMark } from "react-icons/hi2";
-// import "react-h5-audio-player/lib/styles.less";
-// import 'react-h5-audio-player/src/styles.scss'
+import { useBeats } from "../beats/useBeats";
+import "react-h5-audio-player/lib/styles.css";
 
 function Player() {
   const { currentBeat, setCurrentBeat } = useAudioPlayer();
-
-  const queryClient = useQueryClient();
+  const { beats } = useBeats();
 
   if (currentBeat === "") return null;
-
-  const beats = queryClient.getQueryData(["beats"]);
 
   let playingIndex;
   let currentBeatName;
@@ -57,11 +52,6 @@ function Player() {
         </div>
       )}
       <AudioPlayer
-        customProgressBarSection={[
-          RHAP_UI.CURRENT_TIME,
-          RHAP_UI.PROGRESS_BAR,
-          RHAP_UI.CURRENT_LEFT_TIME,
-        ]}
         autoPlay
         onEnded={() => playNext()}
         src={currentBeat}

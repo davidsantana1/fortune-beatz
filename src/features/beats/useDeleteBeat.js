@@ -13,5 +13,6 @@ export function useDeleteBeat() {
     },
     onError: (err) => toast.error(err.message),
   });
+
   return { isDeleting, deleteBeat };
 }

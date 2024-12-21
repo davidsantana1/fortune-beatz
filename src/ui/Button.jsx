@@ -1,9 +1,12 @@
 import { cva } from "class-variance-authority";
 import cn from "../utils/cn";
 
-function Button({ children, variant, size, align, ...props }) {
+function Button({ children, variant, size, align, margin, ...props }) {
   return (
-    <button className={cn(buttonVariants({ variant, size, align }))} {...props}>
+    <button
+      className={cn(buttonVariants({ variant, size, align, margin }))}
+      {...props}
+    >
       {children}
     </button>
   );
@@ -28,11 +31,19 @@ const buttonVariants = cva(
         right: "ml-auto mr-0",
         left: "",
       },
+      margin: {
+        none: "",
+        top: "mt-2",
+        bottom: "mb-2",
+        right: "mr-2",
+        left: "ml-2",
+      },
     },
     defaultVariants: {
       variant: "primary",
       size: "md",
       align: "left",
+      padding: "none",
     },
   },
 );

@@ -4,15 +4,18 @@ import { HiMiniPlayCircle } from "react-icons/hi2";
 import { HiFire } from "react-icons/hi2";
 import Stat from "./Stat";
 import { USDollar } from "../../utils/helpers";
+import { useBeats } from "../beats/useBeats";
 
 function Stats() {
+  const { beats, isPending } = useBeats();
   return (
     <div className="mb-6 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
       <Stat
         title="BEATS"
         color="bg-yellow-700 text-yellow-300"
-        value="58"
+        value={beats?.length}
         icon={<HiMusicalNote />}
+        isLoading={isPending}
       />
       <Stat
         title="SALES"

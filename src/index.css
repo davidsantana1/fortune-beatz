@@ -96,3 +96,7 @@ a.active svg {
 .rhap_rewind-button svg {
   @apply h-8 w-8 fill-brand-50 hover:fill-brand-500;
 }
+
+.css-1tktgsa-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
+  @apply bg-brand-900 text-brand-50 !important;
+}

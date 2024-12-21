@@ -7,9 +7,9 @@ import Dashboard from "./pages/Dashboard";
 import Beats from "./pages/Beats";
 import Sales from "./pages/Sales";
 import DynamicTitle from "./ui/DynamicTitle";
-import Settings from "./pages/Settings";
 import { Toaster } from "react-hot-toast";
 import { AudioPlayerProvider } from "./context/AudioPlayerContext";
+import Licenses from "./pages/Licenses";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -35,7 +35,7 @@ function App() {
               <Route path="dashboard" element={<Dashboard />}></Route>
               <Route path="beats" element={<Beats />}></Route>
               <Route path="sales" element={<Sales />}></Route>
-              <Route path="settings" element={<Settings />}></Route>
+              <Route path="licenses" element={<Licenses />}></Route>
             </Route>
           </Routes>
         </BrowserRouter>
