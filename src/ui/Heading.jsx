@@ -8,13 +8,16 @@ function Heading({
   color,
   margin,
   padding,
+  casing,
   as = "h1",
 }) {
   const H = as;
 
   return (
     <H
-      className={cn(headingVariants({ variant, size, color, margin, padding }))}
+      className={cn(
+        headingVariants({ variant, size, color, margin, padding, casing }),
+      )}
     >
       {children}
     </H>
@@ -47,6 +50,10 @@ const headingVariants = cva("", {
       none: "",
       regular: "p-4",
     },
+    casing: {
+      none: "",
+      capitalize: "capitalize",
+    },
   },
   defaultVariants: {
     variant: "primary",
@@ -54,6 +61,7 @@ const headingVariants = cva("", {
     size: "lg",
     margin: "regular",
     padding: "none",
+    casing: "none",
   },
 });
 

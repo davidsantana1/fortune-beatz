@@ -65,8 +65,6 @@ export async function createEditBeat(newBeat, id) {
 
   if (hasAudioPath && hasImagePath) return data;
 
-  console.log(audioPath);
-
   // 3. Delete the beat if there was an error uploading the image
   if (storageError) {
     await supabase.from("beats").delete().eq("id", data.id);

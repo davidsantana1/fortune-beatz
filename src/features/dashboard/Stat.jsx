@@ -1,4 +1,13 @@
-function Stat({ title, value, icon, color }) {
+import SpinnerMini from "../../ui/SpinnerMini";
+
+function Stat({ title, value, icon, color, isLoading }) {
+  if (isLoading)
+    return (
+      <div className="flex items-center justify-center gap-5 rounded-md bg-brand-950 p-4">
+        <SpinnerMini />
+      </div>
+    );
+
   return (
     <div className="flex items-center gap-5 rounded-md bg-brand-950 p-4">
       <div

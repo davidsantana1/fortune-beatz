@@ -3,7 +3,7 @@ import {
   HiOutlineCurrencyDollar,
   HiOutlineHome,
   HiOutlineMusicalNote,
-  HiOutlineCog6Tooth,
+  HiOutlineDocumentText,
 } from "react-icons/hi2";
 
 function MainNav({ onOpen }) {
@@ -34,9 +34,9 @@ function MainNav({ onOpen }) {
         />
         <NavItem
           onClick={handleCloseNav}
-          to="/settings"
-          title="Settings"
-          icon={<HiOutlineCog6Tooth />}
+          to="/licenses"
+          title="Licenses"
+          icon={<HiOutlineDocumentText />}
         />
       </ul>
     </nav>

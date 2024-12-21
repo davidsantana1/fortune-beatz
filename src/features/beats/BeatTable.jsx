@@ -14,7 +14,7 @@ function BeatTable() {
   return (
     <Table>
       <Table.Header>
-        <TableItem className="w-48 sm:w-14">#</TableItem>
+        <TableItem>#</TableItem>
         <TableItem isImage={true}></TableItem>
         <TableItem>Name</TableItem>
         <TableItem>Artist Type</TableItem>
@@ -22,7 +22,7 @@ function BeatTable() {
         <TableItem>Time</TableItem>
         <TableItem>BPM</TableItem>
         <TableItem>Key</TableItem>
-        <TableItem className="w-2">Actions</TableItem>
+        <TableItem></TableItem>
       </Table.Header>
       <Table.Body
         data={beats}
