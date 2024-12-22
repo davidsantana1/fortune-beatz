@@ -7,12 +7,14 @@ import { KEYS } from "../../utils/constants";
 import Form from "../../ui/Form";
 import TwoColsInput from "../../ui/TwoColsInput";
 import TwoColsFileInput from "../../ui/TwoColsFileInput";
+import { useTranslation } from "react-i18next";
 
 function CreateBeatForm({
   beatToEdit = {},
   onCloseModal,
   isEditSession = false,
 }) {
+  const { t } = useTranslation();
   const { isCreating, createBeat } = useCreateBeat();
   const { isEditing, editBeat } = useEditBeat();
   const isWorking = isCreating || isEditing;
@@ -69,9 +71,9 @@ function CreateBeatForm({
             disabled={isWorking}
             errors={errors}
             register={register}
-            label="Name"
+            label={t("beatsTableName")}
             id="name"
-            placeholder="Beat Name"
+            placeholder={t("beatsFormNamePlaceholder")}
             inputType="text"
           />
 
@@ -79,7 +81,7 @@ function CreateBeatForm({
             disabled={isWorking}
             errors={errors}
             register={register}
-            label="Type"
+            label={t("beatsTableArtistType")}
             id="type"
             placeholder="Bad Bunny"
             inputType="text"
@@ -89,7 +91,7 @@ function CreateBeatForm({
             disabled={isWorking}
             errors={errors}
             register={register}
-            label="Genre"
+            label={t("beatsTableGenre")}
             id="genre"
             placeholder="Reggaeton"
             inputType="text"
@@ -111,12 +113,12 @@ function CreateBeatForm({
             disabled={isWorking}
             errors={errors}
             register={register}
-            label="Key"
+            label={t("beatsTableKey")}
             id="key"
             placeholder="B minor"
           >
             <option value="" disabled>
-              --- Select a key ---
+              --- {t("beatsFormKeyPlaceholder")} ---
             </option>
             {KEYS.map((key) => (
               <option key={key} value={key}>
@@ -130,7 +132,7 @@ function CreateBeatForm({
       <TwoColsFileInput>
         <TwoColsFileInput.Col>
           <FileInput
-            inputName="Image"
+            inputName={t("beatsFormImageLabel")}
             errors={errors}
             type="file"
             accept="image/*"

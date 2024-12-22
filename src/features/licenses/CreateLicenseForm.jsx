@@ -6,8 +6,10 @@ import { useLicenses } from "./useLicenses";
 import toast from "react-hot-toast";
 import Form from "../../ui/Form";
 import TwoColsInput from "../../ui/TwoColsInput";
+import { useTranslation } from "react-i18next";
 
 function CreateLicenseForm({ isEditSession = false, license, onCloseModal }) {
+  const { t } = useTranslation();
   const {
     handleSubmit,
     register,
@@ -60,7 +62,7 @@ function CreateLicenseForm({ isEditSession = false, license, onCloseModal }) {
   return (
     <Form
       isEditSession={isEditSession}
-      formName="License"
+      formName={t("licensesConfirmDelete")}
       onSubmit={onSubmit}
       handleSubmit={handleSubmit}
       isWorking={isWorking}
@@ -72,16 +74,16 @@ function CreateLicenseForm({ isEditSession = false, license, onCloseModal }) {
             disabled={isWorking}
             errors={errors}
             register={register}
-            label="Name"
+            label={t("licensesTableName")}
             id="name"
-            placeholder="Basic"
+            placeholder={t("licensesFormNamePlaceholder")}
             inputType="text"
           />
           <FormRow
             disabled={isWorking}
             errors={errors}
             register={register}
-            label="Price"
+            label={t("licensesTablePrice")}
             id="price"
             placeholder="19.99"
             inputType="number"
@@ -92,7 +94,7 @@ function CreateLicenseForm({ isEditSession = false, license, onCloseModal }) {
             disabled={isWorking}
             errors={errors}
             register={register}
-            label="Allowed Music Videos"
+            label={t("licensesTableMusicVideos")}
             id="musicVideos"
             placeholder="1"
             inputType="number"
@@ -102,7 +104,7 @@ function CreateLicenseForm({ isEditSession = false, license, onCloseModal }) {
             disabled={isWorking}
             errors={errors}
             register={register}
-            label="Allowed Copies"
+            label={t("licensesTableCopies")}
             id="allowedCopies"
             placeholder="20000"
             inputType="number"
@@ -114,7 +116,7 @@ function CreateLicenseForm({ isEditSession = false, license, onCloseModal }) {
             disabled={isWorking}
             errors={errors}
             register={register}
-            label="Allowed Streams"
+            label={t("licensesTableStreams")}
             id="allowedStreams"
             placeholder="20000"
             inputType="number"
@@ -125,13 +127,13 @@ function CreateLicenseForm({ isEditSession = false, license, onCloseModal }) {
             isSelect={true}
             errors={errors}
             register={register}
-            label="Allow Profit Live Performance"
+            label={t("licensesTableProfitLivePerformances")}
             id="forProfitLivePerformance"
           >
             <option value="" disabled>
-              --- Select an option ---
+              --- {t("licensesFormKeyPlaceholder")} ---
             </option>
-            <option value="yes">Yes</option>
+            <option value="yes">{t("licensesTableYes")}</option>
             <option value="no">No</option>
           </FormRow>
 
@@ -140,7 +142,7 @@ function CreateLicenseForm({ isEditSession = false, license, onCloseModal }) {
             placeholder="1"
             errors={errors}
             register={register}
-            label="Allowed Radio Stations"
+            label={t("licensesTableRadioStations")}
             id="allowedRadioStations"
             inputType="number"
           />

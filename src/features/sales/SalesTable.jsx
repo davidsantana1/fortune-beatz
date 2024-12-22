@@ -4,6 +4,7 @@ import TableItem from "../../ui/TableItem";
 import SalesRow from "./SalesRow";
 import Error from "../../ui/Error";
 import { useSales } from "./useSales";
+import { useTranslation } from "react-i18next";
 
 // const fakeSales = [
 //   {
@@ -58,6 +59,7 @@ import { useSales } from "./useSales";
 // ];
 
 function SalesTable() {
+  const { t } = useTranslation();
   const { sales, isPending, error } = useSales();
 
   if (isPending) return <Spinner />;
@@ -68,12 +70,12 @@ function SalesTable() {
     <Table>
       <Table.Header>
         <TableItem>#</TableItem>
-        <TableItem>Beat Name</TableItem>
-        <TableItem>Buyer</TableItem>
-        <TableItem>Date</TableItem>
-        <TableItem>License Type</TableItem>
-        <TableItem>Payment Method</TableItem>
-        <TableItem>Amount</TableItem>
+        <TableItem>{t("salesTableBeatName")}</TableItem>
+        <TableItem>{t("salesTableBuyer")}</TableItem>
+        <TableItem>{t("salesTableDate")}</TableItem>
+        <TableItem>{t("salesTableLicenseType")}</TableItem>
+        <TableItem>{t("salesTablePaymentMethod")}</TableItem>
+        <TableItem>{t("salesTableAmount")}</TableItem>
       </Table.Header>
       <Table.Body
         data={sales}

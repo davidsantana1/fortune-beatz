@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import { useLicenses } from "../licenses/useLicenses";
 import { useSales } from "../sales/useSales";
+import { useTranslation } from "react-i18next";
 
 const colors = [
   "#ef4444",
@@ -24,6 +25,7 @@ const colors = [
 ];
 
 function SalesSummary() {
+  const { t } = useTranslation();
   const { licenses, isPending: isPendingLicenses } = useLicenses();
   const { sales, isPending: isPendingSales } = useSales();
 
@@ -51,12 +53,12 @@ function SalesSummary() {
     <div className="h-80 rounded-md bg-brand-900 p-6">
       {(isPendingLicenses || isPendingSales) && <Spinner />}
       {!licenses && !isPendingLicenses && (
-        <Empty>No sales have been made yet</Empty>
+        <Empty asDiv={true}>{t("salesSummaryEmpty")}</Empty>
       )}
       {licenses && (
         <>
           <Heading size="sm" as="h2" margin="minimal">
-            Sales Summary
+            {t("salesSummaryTitle")}
           </Heading>
           <ResponsiveContainer width="100%" height={240}>
             <PieChart>

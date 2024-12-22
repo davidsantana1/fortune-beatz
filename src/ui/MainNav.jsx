@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import NavItem from "./NavItem";
 import {
   HiOutlineCurrencyDollar,
@@ -7,6 +8,7 @@ import {
 } from "react-icons/hi2";
 
 function MainNav({ onOpen }) {
+  const { t } = useTranslation();
   function handleCloseNav() {
     if (!onOpen) return;
     onOpen(false);
@@ -18,7 +20,7 @@ function MainNav({ onOpen }) {
         <NavItem
           onClick={handleCloseNav}
           to="/dashboard"
-          title="Home"
+          title={t("navHome")}
           icon={<HiOutlineHome />}
         />
         <NavItem
@@ -30,13 +32,13 @@ function MainNav({ onOpen }) {
         <NavItem
           onClick={handleCloseNav}
           to="/sales"
-          title="Sales"
+          title={t("salesTitle")}
           icon={<HiOutlineCurrencyDollar />}
         />
         <NavItem
           onClick={handleCloseNav}
           to="/licenses"
-          title="Licenses"
+          title={t("licensesTitle")}
           icon={<HiOutlineDocumentText />}
         />
       </ul>

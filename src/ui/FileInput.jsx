@@ -1,12 +1,14 @@
 import { forwardRef } from "react";
 import Label from "./Label";
 import FormError from "./FormError";
+import { useTranslation } from "react-i18next";
 
 const FileInput = forwardRef(
   (
     { isEditSession = false, inputName, id, errors, register, ...props },
     ref,
   ) => {
+    const { t } = useTranslation();
     return (
       <>
         <div className="flex items-center gap-4">
@@ -20,7 +22,7 @@ const FileInput = forwardRef(
             id={id}
             ref={ref}
             {...register(id, {
-              required: isEditSession ? false : "This field is required",
+              required: isEditSession ? false : t("formRequiredMessage"),
             })}
           />
         </div>

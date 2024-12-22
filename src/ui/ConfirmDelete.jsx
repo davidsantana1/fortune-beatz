@@ -1,15 +1,16 @@
+import { useTranslation } from "react-i18next";
 import Button from "./Button";
 import Heading from "./Heading";
 
 function ConfirmDelete({ itemType, onCloseModal, onConfirm, disabled }) {
+  const { t } = useTranslation();
   return (
     <>
       <Heading casing="capitalize" variant="secondary" as="h3" size="md">
-        Delete {itemType}s
+        {t("contextMenuDelete")} <span className="capitalize">{itemType}s</span>
       </Heading>
       <span className="text-xl text-brand-50">
-        Are you sure you want to delete this {itemType} permanently? This action
-        cannot be undone.
+        {t("confirmDeleteMessage", { name: itemType })}
       </span>
       <div className="mt-3 flex justify-end gap-4">
         <Button
@@ -18,7 +19,7 @@ function ConfirmDelete({ itemType, onCloseModal, onConfirm, disabled }) {
           size="lg"
           variant="danger"
         >
-          Delete
+          {t("contextMenuDelete")}
         </Button>
         <Button
           disabled={disabled}
@@ -26,7 +27,7 @@ function ConfirmDelete({ itemType, onCloseModal, onConfirm, disabled }) {
           size="lg"
           variant="outline"
         >
-          Cancel
+          {t("cancelButton")}
         </Button>
       </div>
     </>

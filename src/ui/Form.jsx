@@ -2,6 +2,7 @@ import { HiMiniPlusCircle, HiPencil } from "react-icons/hi2";
 import Heading from "./Heading";
 import Button from "./Button";
 import SpinnerMini from "./SpinnerMini";
+import { useTranslation } from "react-i18next";
 
 function Form({
   isEditSession = false,
@@ -12,12 +13,14 @@ function Form({
   formId,
   children,
 }) {
+  const { t } = useTranslation();
   return (
     <>
       <Heading size="md">
         <div className="flex items-center gap-3 text-xl sm:text-3xl">
           {isEditSession ? <HiPencil /> : <HiMiniPlusCircle size="1.6rem" />}
-          {isEditSession ? "Edit" : "Create"} {formName}
+          {isEditSession ? t("formEditButton") : t("formCreateButton")}{" "}
+          <span className="capitalize">{formName}</span>
         </div>
       </Heading>
       <form
@@ -35,7 +38,13 @@ function Form({
           margin="top"
           disabled={isWorking}
         >
-          {isWorking ? <SpinnerMini /> : isEditSession ? "Edit" : "Create"}
+          {isWorking ? (
+            <SpinnerMini />
+          ) : isEditSession ? (
+            t("formEditButton")
+          ) : (
+            t("formCreateButton")
+          )}
         </Button>
       </div>
     </>

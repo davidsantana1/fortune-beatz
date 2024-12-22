@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import FormError from "./FormError";
 import Input from "./Input";
 import Label from "./Label";
@@ -15,6 +16,7 @@ function FormRow({
   disabled,
   children,
 }) {
+  const { t } = useTranslation();
   return (
     <>
       <div className="flex items-center gap-4">
@@ -27,7 +29,7 @@ function FormRow({
           type={inputType}
           id={id}
           placeholder={placeholder}
-          {...register(id, { required: "This field is required" })}
+          {...register(id, { required: t("formRequiredMessage") })}
           step={inputStep}
         />
       ) : (
@@ -35,7 +37,7 @@ function FormRow({
           defaultValue=""
           disabled={disabled}
           id={id}
-          {...register(id, { required: "This field is required" })}
+          {...register(id, { required: t("formRequiredMessage") })}
         >
           {children}
         </SelectInput>

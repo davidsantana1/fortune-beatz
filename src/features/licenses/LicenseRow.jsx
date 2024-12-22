@@ -7,8 +7,10 @@ import { useDeleteLicense } from "./useDeleteLicense";
 import { useState } from "react";
 import CreateLicenseForm from "./CreateLicenseForm";
 import { formatNumber, USDollar } from "../../utils/helpers";
+import { useTranslation } from "react-i18next";
 
 function LicenseRow({ license, number }) {
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
   const { isDeleting, deleteLicense } = useDeleteLicense();
 
@@ -42,7 +44,7 @@ function LicenseRow({ license, number }) {
       <TableItem as="td">{formatNumber(allowedCopies)}</TableItem>
       <TableItem as="td">{formatNumber(allowedStreams)}</TableItem>
       <TableItem className="text-center" as="td">
-        {forProfitLivePerformance ? "Yes" : "No"}
+        {forProfitLivePerformance ? t("licensesTableYes") : "No"}
       </TableItem>
       <TableItem className="text-center" as="td">
         {allowedRadioStations}
@@ -71,13 +73,13 @@ function LicenseRow({ license, number }) {
           >
             <Modal.Open opens="edit">
               <MenuItem className="gap-2" onClick={handleClose}>
-                <HiPencil /> Edit
+                <HiPencil /> {t("formEditButton")}
               </MenuItem>
             </Modal.Open>
 
             <Modal.Open opens="delete">
               <MenuItem className="gap-2" onClick={handleClose}>
-                <HiTrash /> Delete
+                <HiTrash /> {t("contextMenuDelete")}
               </MenuItem>
             </Modal.Open>
           </Menu>
@@ -90,7 +92,7 @@ function LicenseRow({ license, number }) {
             <ConfirmDelete
               disabled={isDeleting}
               onConfirm={() => deleteLicense(id)}
-              itemType="license"
+              itemType={t("licensesConfirmDelete")}
             />
           </Modal.Window>
         </TableItem>

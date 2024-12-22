@@ -12,8 +12,10 @@ import {
 import { useBeats } from "../beats/useBeats";
 import { useSales } from "../sales/useSales";
 import { useGetViews } from "../../hooks/useChannelViews";
+import { useTranslation } from "react-i18next";
 
 function Stats() {
+  const { t } = useTranslation();
   const { beats, isPending } = useBeats();
   const { sales, isPending: isLoadingSales, error } = useSales();
   const { isPending: isLoadingViews, views } = useGetViews();
@@ -31,30 +33,30 @@ function Stats() {
   return (
     <div className="mb-6 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
       <Stat
-        title="BEATS"
+        title="Beats"
         color="bg-orange-700 text-orange-300"
         value={beats?.length}
         icon={<HiMusicalNote />}
         isLoading={isPending}
       />
       <Stat
-        title="SALES"
+        title={t("statSales")}
         color="bg-green-600 text-green-300"
         value={USDollar.format(totalSales)}
         icon={<GiMoneyStack />}
         isLoading={isLoadingSales}
       />
       <Stat
-        title="VIEWS"
+        title={t("statViews")}
         color="bg-sky-600 text-sky-300"
         value={formatNumber(views)}
         icon={<HiMiniPlayCircle />}
         isLoading={isLoadingViews}
       />
       <Stat
-        title="SALES STREAK"
+        title={t("statSalesStreak")}
         color="bg-red-700 text-red-300"
-        value={`${salesStreak} days`}
+        value={t("streakMessage", { count: salesStreak })}
         icon={<HiFire />}
         isLoading={isLoadingSales}
       />

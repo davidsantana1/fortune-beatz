@@ -11,8 +11,10 @@ import { useState } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useAudioDuration } from "../../hooks/useAudioDuration";
+import { useTranslation } from "react-i18next";
 
 function BeatRow({ beat, number }) {
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
   const { setCurrentBeat, currentBeat } = useAudioPlayer();
   const { isDeleting, deleteBeat } = useDeleteBeat();
@@ -100,13 +102,13 @@ function BeatRow({ beat, number }) {
           >
             <Modal.Open opens="edit">
               <MenuItem className="gap-2" onClick={handleClose}>
-                <HiPencil /> Edit
+                <HiPencil /> {t("formEditButton")}
               </MenuItem>
             </Modal.Open>
 
             <Modal.Open opens="delete">
               <MenuItem className="gap-2" onClick={handleClose}>
-                <HiTrash /> Delete
+                <HiTrash /> {t("contextMenuDelete")}
               </MenuItem>
             </Modal.Open>
           </Menu>
@@ -118,7 +120,10 @@ function BeatRow({ beat, number }) {
             <Modal.Window name="delete">
               <ConfirmDelete
                 disabled={isDeleting}
-                onConfirm={() => deleteBeat(beatId)}
+                onConfirm={() => {
+                  if (audio === currentBeat) setCurrentBeat("");
+                  deleteBeat(beatId);
+                }}
                 itemType="beat"
               />
             </Modal.Window>

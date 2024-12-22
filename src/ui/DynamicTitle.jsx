@@ -1,18 +1,23 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { STORE_NAME } from "../utils/constants";
+import { useTranslation } from "react-i18next";
 
 const DynamicTitle = () => {
+  const { t } = useTranslation();
   const location = useLocation();
 
   useEffect(() => {
+    let title = `${STORE_NAME} -`;
     const titles = {
-      "/dashboard": "Fortune Beatz - Dashboard",
-      "/beats": "Fortune Beatz - Beats",
-      "/sales": "Fortune Beatz - Sales",
+      "/dashboard": `${title} ${t("dashboardTitle")}`,
+      "/beats": `${title} Beats`,
+      "/sales": `${title} ${t("salesTitle")}`,
+      "/licenses": `${title} ${t("licensesTitle")}`,
     };
 
     document.title = titles[location.pathname] || "Fortune Beatz";
-  }, [location]);
+  }, [location, t]);
 
   return null;
 };
