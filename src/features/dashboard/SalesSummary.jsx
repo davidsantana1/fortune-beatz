@@ -1,5 +1,6 @@
 import Heading from "../../ui/Heading";
 import Spinner from "../../ui/Spinner";
+import Empty from "../../ui/Empty";
 import {
   Cell,
   Legend,
@@ -9,47 +10,49 @@ import {
   Tooltip,
 } from "recharts";
 import { useLicenses } from "../licenses/useLicenses";
+import { useSales } from "../sales/useSales";
 
-const startData = [
-  {
-    value: 3,
-    color: "#ef4444",
-  },
-  {
-    value: 9,
-    color: "#22c55e",
-  },
-  {
-    value: 5,
-    color: "#3b82f6",
-  },
-  {
-    value: 2,
-    color: "#a855f7",
-  },
+const colors = [
+  "#ef4444",
+  "#22c55e",
+  "#3b82f6",
+  "#f97316",
+  "#eab308",
+  "#84cc16",
+  "#10b981",
+  "#64748b",
 ];
 
 function SalesSummary() {
-  const { licenses, isPending } = useLicenses();
+  const { licenses, isPending: isPendingLicenses } = useLicenses();
+  const { sales, isPending: isPendingSales } = useSales();
 
-  let newData = {};
+  const prepareChartData = () => {
+    if (!licenses || !sales) return [];
 
-  if (!isPending) {
-    newData = startData.map((obj, index) => {
-      const license = licenses[index];
+    const adjustedColors = colors.slice(0, licenses.length);
 
-      if (!licenses[index]) return {};
+    return licenses.map((license, index) => {
+      const quantitySold = sales.filter(
+        (sale) => sale.licenseType === license.name,
+      ).length;
 
       return {
-        ...obj,
-        type: license?.name,
+        color: adjustedColors[index],
+        value: quantitySold,
+        type: license.name,
       };
     });
-  }
+  };
+
+  const newData = prepareChartData();
 
   return (
     <div className="h-80 rounded-md bg-brand-950 p-6">
-      {(!licenses || isPending) && <Spinner />}
+      {(isPendingLicenses || isPendingSales) && <Spinner />}
+      {!licenses && !isPendingLicenses && (
+        <Empty>No sales have been made yet</Empty>
+      )}
       {licenses && (
         <>
           <Heading size="sm" as="h2" margin="minimal">
