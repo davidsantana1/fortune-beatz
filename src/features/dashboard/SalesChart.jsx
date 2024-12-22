@@ -13,6 +13,7 @@ import { formatDate } from "../../utils/helpers";
 import Heading from "../../ui/Heading";
 import Spinner from "../../ui/Spinner";
 import Error from "../../ui/Error";
+import { BRAND_COLORS } from "../../utils/constants";
 
 function SalesChart() {
   const { sales, isPending, error } = useSales();
@@ -51,12 +52,12 @@ function SalesChart() {
   // Optionally, you can remove the originalDate property if not needed
   data.forEach((item) => delete item.originalDate);
 
-  const strokeColor = "#52caff";
-  const fillColor = "#2aacff";
-  const brandTextColor = "#eefaff";
+  const strokeColor = BRAND_COLORS["400"];
+  const fillColor = BRAND_COLORS["500"];
+  const brandTextColor = BRAND_COLORS["50"];
 
   return (
-    <div className="rounded-md bg-brand-950 p-6">
+    <div className="rounded-md bg-brand-900 p-6">
       {isPending && <Spinner />}
       {error && <Error>Couldn&apos;t get sales data</Error>}
       {sales && (

@@ -11,9 +11,10 @@ function MainNav({ onOpen }) {
     if (!onOpen) return;
     onOpen(false);
   }
+
   return (
     <nav>
-      <ul className="flex flex-col gap-2">
+      <ul className="w-54 flex flex-col gap-2 pb-2">
         <NavItem
           onClick={handleCloseNav}
           to="/dashboard"

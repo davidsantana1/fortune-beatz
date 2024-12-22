@@ -6,7 +6,7 @@ function Empty({ children }) {
       <tr>
         <Heading
           as="td"
-          padding="regular"
+          padding="none"
           variation="tertiary"
           size="sm"
           color="light"

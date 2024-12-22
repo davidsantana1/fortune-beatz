@@ -13,6 +13,7 @@ function FormRow({
   inputType,
   inputStep,
   disabled,
+  children,
 }) {
   return (
     <>
@@ -36,11 +37,7 @@ function FormRow({
           id={id}
           {...register(id, { required: "This field is required" })}
         >
-          <option value="" disabled>
-            --- Select an option ---
-          </option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
+          {children}
         </SelectInput>
       )}
     </>

@@ -16,7 +16,7 @@ function SalesRow({ sale, number }) {
       <TableItem as="td">
         <div className="w-full">
           <div
-            className={`${paymentMethod === "Paypal" ? "bg-blue-900" : "bg-green-500"} ml-12 inline-block rounded-md p-2`}
+            className={`${paymentMethod === "Paypal" ? "bg-blue-900" : "bg-orange-500"} ml-12 inline-block rounded-md p-2`}
           >
             {paymentMethod === "Paypal" ? (
               <FaPaypal size={20} />

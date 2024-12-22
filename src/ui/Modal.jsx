@@ -35,8 +35,9 @@ function Window({ children, name }) {
   return createPortal(
     <Overlay>
       <div
+        onClick={(e) => e.stopPropagation()}
         ref={ref}
-        className="fixed left-1/2 top-1/2 flex w-4/5 -translate-x-1/2 -translate-y-1/2 flex-col rounded-lg bg-brand-950 px-12 pb-9 pt-12 shadow-lg transition-all md:w-1/2"
+        className="fixed left-1/2 top-1/2 flex w-4/5 -translate-x-1/2 -translate-y-1/2 flex-col rounded-lg bg-brand-900 px-8 pb-8 pt-8 shadow-lg transition-all md:w-3/5"
       >
         <ModalButton onClick={close}>
           <HiXMark />

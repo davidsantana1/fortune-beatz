@@ -32,27 +32,27 @@ function Stats() {
     <div className="mb-6 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
       <Stat
         title="BEATS"
-        color="bg-yellow-700 text-yellow-300"
+        color="bg-orange-700 text-orange-300"
         value={beats?.length}
         icon={<HiMusicalNote />}
         isLoading={isPending}
       />
       <Stat
         title="SALES"
-        color="bg-green-700 text-green-300"
+        color="bg-green-600 text-green-300"
         value={USDollar.format(totalSales)}
         icon={<GiMoneyStack />}
         isLoading={isLoadingSales}
       />
       <Stat
-        title="STREAMS"
-        color="bg-brand-700 text-brand-300"
+        title="VIEWS"
+        color="bg-sky-600 text-sky-300"
         value={formatNumber(views)}
         icon={<HiMiniPlayCircle />}
         isLoading={isLoadingViews}
       />
       <Stat
-        title="STREAK"
+        title="SALES STREAK"
         color="bg-red-700 text-red-300"
         value={`${salesStreak} days`}
         icon={<HiFire />}

@@ -1,14 +1,12 @@
-import Input from "../../ui/Input";
-import Heading from "../../ui/Heading";
-import Label from "../../ui/Label";
-import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
-import SpinnerMini from "../../ui/SpinnerMini";
 import { useForm } from "react-hook-form";
-import FormError from "../../ui/FormError";
-import { HiMiniPlusCircle, HiPencil } from "react-icons/hi2";
+import FormRow from "../../ui/FormRow";
 import { useCreateBeat } from "./useCreateBeat";
 import { useEditBeat } from "./useEditBeat";
+import { KEYS } from "../../utils/constants";
+import Form from "../../ui/Form";
+import TwoColsInput from "../../ui/TwoColsInput";
+import TwoColsFileInput from "../../ui/TwoColsFileInput";
 
 function CreateBeatForm({
   beatToEdit = {},
@@ -57,109 +55,106 @@ function CreateBeatForm({
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
-      <Heading size="md">
-        <div className="flex items-center gap-3 text-xl sm:text-3xl">
-          {isEditSession ? <HiPencil /> : <HiMiniPlusCircle size="1.6rem" />}
-          {isEditSession ? "Edit" : "Create"} Beat
-        </div>
-      </Heading>
-      <div className="flex items-center gap-4">
-        <Label htmlFor="name">Name</Label>
-        <FormError error={errors?.name?.message} />
-      </div>
-      <Input
-        id="name"
-        placeholder="Name"
-        {...register("name", { required: "This field is required" })}
-        disabled={isWorking}
-      />
+    <Form
+      isEditSession={isEditSession}
+      formName="Beat"
+      onSubmit={onSubmit}
+      handleSubmit={handleSubmit}
+      isWorking={isWorking}
+      formId="create-beat-form"
+    >
+      <TwoColsInput>
+        <TwoColsInput.Col>
+          <FormRow
+            disabled={isWorking}
+            errors={errors}
+            register={register}
+            label="Name"
+            id="name"
+            placeholder="Beat Name"
+            inputType="text"
+          />
 
-      <div className="flex items-center gap-4">
-        <Label htmlFor="type">Type</Label>
-        <FormError error={errors?.type?.message} />
-      </div>
-      <Input
-        id="type"
-        placeholder="Bad Bunny"
-        {...register("type", { required: "This field is required" })}
-        disabled={isWorking}
-      />
+          <FormRow
+            disabled={isWorking}
+            errors={errors}
+            register={register}
+            label="Type"
+            id="type"
+            placeholder="Bad Bunny"
+            inputType="text"
+          />
 
-      <div className="flex items-center gap-4">
-        <Label htmlFor="genre">Genre</Label>
-        <FormError error={errors?.genre?.message} />
-      </div>
-      <Input
-        id="genre"
-        placeholder="Reggaeton"
-        {...register("genre", {
-          required: "This field is required",
-        })}
-        disabled={isWorking}
-      />
+          <FormRow
+            disabled={isWorking}
+            errors={errors}
+            register={register}
+            label="Genre"
+            id="genre"
+            placeholder="Reggaeton"
+            inputType="text"
+          />
+        </TwoColsInput.Col>
+        <TwoColsInput.Col>
+          <FormRow
+            disabled={isWorking}
+            errors={errors}
+            register={register}
+            label="BPM"
+            id="bpm"
+            placeholder="90"
+            inputType="number"
+          />
 
-      <div className="flex items-center gap-4">
-        <Label htmlFor="bpm">BPM</Label>
-        <FormError error={errors?.bpm?.message} />
-      </div>
-      <Input
-        id="bpm"
-        placeholder="90"
-        {...register("bpm", { required: "This field is required" })}
-        disabled={isWorking}
-      />
+          <FormRow
+            isSelect={true}
+            disabled={isWorking}
+            errors={errors}
+            register={register}
+            label="Key"
+            id="key"
+            placeholder="B minor"
+          >
+            <option value="" disabled>
+              --- Select a key ---
+            </option>
+            {KEYS.map((key) => (
+              <option key={key} value={key}>
+                {key}
+              </option>
+            ))}
+          </FormRow>
+        </TwoColsInput.Col>
+      </TwoColsInput>
 
-      <div className="flex items-center gap-4">
-        <Label htmlFor="key">Key</Label>
-        <FormError error={errors?.key?.message} />
-      </div>
-      <Input
-        id="key"
-        placeholder="B minor"
-        {...register("key", { required: "This field is required" })}
-        disabled={isWorking}
-      />
-
-      <div className="grid xl:grid-cols-2">
-        <div>
-          <div className="flex items-center gap-4">
-            <Label htmlFor="image">Image</Label>
-            <FormError error={errors?.image?.message} />
-          </div>
+      <TwoColsFileInput>
+        <TwoColsFileInput.Col>
           <FileInput
+            inputName="Image"
+            errors={errors}
             type="file"
             accept="image/*"
             disabled={isWorking}
             id="image"
-            {...register("image", {
-              required: isEditSession ? false : "This field is required",
-            })}
+            isEditSession={isEditSession}
+            register={register}
           />
-        </div>
-        <div>
-          <div className="flex items-center gap-4">
-            <Label htmlFor="audio">Beat</Label>
-            <FormError error={errors?.audio?.message} />
-          </div>
+        </TwoColsFileInput.Col>
+
+        <TwoColsFileInput.Col>
           <FileInput
+            inputName="Beat"
+            errors={errors}
             type="file"
             accept="audio/*"
             disabled={isWorking}
             id="audio"
-            {...register("audio", {
-              required: isEditSession ? false : "This field is required",
-            })}
+            isEditSession={isEditSession}
+            register={register}
           />
-        </div>
-      </div>
-
-      {/* <Input className="hidden" id="time" {...register("time")} value={154} /> */}
-
-      <Button align="right" size="lg" disabled={isWorking}>
-        {isWorking ? <SpinnerMini /> : isEditSession ? "Edit" : "Create"}
-      </Button>
-    </form>
+        </TwoColsFileInput.Col>
+      </TwoColsFileInput>
+    </Form>
   );
 }
 

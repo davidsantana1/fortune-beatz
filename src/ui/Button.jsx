@@ -20,7 +20,7 @@ const buttonVariants = cva(
         primary: "bg-brand-600 hover:bg-brand-700",
         secondary: "bg-brand-500 hover:bg-brand-800",
         outline: "text-brand-100 border-2 border-brand-100 hover:bg-brand-500",
-        danger: "bg-red-500 hover:bg-red-600",
+        danger: "bg-red-600 hover:bg-red-700",
       },
       size: {
         sm: "text-sm px-2.5 py-1",
@@ -33,7 +33,7 @@ const buttonVariants = cva(
       },
       margin: {
         none: "",
-        top: "mt-2",
+        top: "mt-4",
         bottom: "mb-2",
         right: "mr-2",
         left: "ml-2",
