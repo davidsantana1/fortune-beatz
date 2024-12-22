@@ -10,11 +10,13 @@ function Heading({
   padding,
   casing,
   as = "h1",
+  ...props
 }) {
   const H = as;
 
   return (
     <H
+      {...props}
       className={cn(
         headingVariants({ variant, size, color, margin, padding, casing }),
       )}
@@ -30,6 +32,7 @@ const headingVariants = cva("", {
       light: "text-brand-50",
       lighter: "text-gray-400",
       dark: "text-gray-700",
+      nav: "text-gray-400 group-hover:text-brand-50",
     },
     variant: {
       primary: "font-bold",

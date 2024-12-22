@@ -6,6 +6,7 @@ import {
   HiOutlineMusicalNote,
   HiOutlineDocumentText,
 } from "react-icons/hi2";
+import LanguageSelector from "./LanguageSelector";
 
 function MainNav({ onOpen }) {
   const { t } = useTranslation();
@@ -41,6 +42,7 @@ function MainNav({ onOpen }) {
           title={t("licensesTitle")}
           icon={<HiOutlineDocumentText />}
         />
+        <LanguageSelector />
       </ul>
     </nav>
   );

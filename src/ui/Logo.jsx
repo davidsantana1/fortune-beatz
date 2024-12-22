@@ -5,7 +5,7 @@ function Logo({ className }) {
     <Link className={className} to="dashboard">
       <img
         alt="Fortune Beatz Logo"
-        className={`${className} max-h-20 max-w-20`}
+        className={`${className} max-h-14 max-w-14 lg:max-h-20 lg:max-w-20`}
         src="logo.webp"
       />
     </Link>
