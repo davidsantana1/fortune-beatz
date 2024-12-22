@@ -1,11 +1,19 @@
+import { getPagination } from "../utils/helpers";
 import supabase, { supabaseUrl } from "./supabase";
 
-export async function getBeats() {
-  const { data, error } = await supabase.from("beats").select("*");
+export async function getBeats({ page }) {
+  let query = supabase.from("beats").select("*", { count: "exact" });
+
+  if (page) {
+    const { from, to } = getPagination({ page });
+    query.range(from, to);
+  }
+
+  const { data, error, count } = await query;
 
   if (error) throw new Error("Beats couldn't be loaded");
 
-  return data;
+  return { data, count };
 }
 
 export async function createEditBeat(newBeat, id) {

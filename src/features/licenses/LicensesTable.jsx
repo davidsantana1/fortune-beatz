@@ -7,12 +7,12 @@ import { useTranslation } from "react-i18next";
 
 function LicensesTable() {
   const { t } = useTranslation();
-  const { isPending, licenses } = useLicenses();
+  const { isPending, licenses, count } = useLicenses();
 
   if (isPending) return <Spinner />;
 
   return (
-    <Table>
+    <Table count={count} licenses={true}>
       <Table.Header>
         <TableItem>#</TableItem>
         <TableItem>{t("licensesTableName")}</TableItem>

@@ -13,7 +13,7 @@ function Button({ children, variant, size, align, margin, ...props }) {
 }
 
 const buttonVariants = cva(
-  "rounded-md text-brand-50 font-medium transition-all",
+  "rounded-md text-brand-50 font-medium transition-all disabled:cursor-not-allowed",
   {
     variants: {
       variant: {
@@ -21,6 +21,7 @@ const buttonVariants = cva(
         secondary: "bg-brand-500 hover:bg-brand-800",
         outline: "text-brand-100 border-2 border-brand-100 hover:bg-brand-500",
         danger: "bg-red-600 hover:bg-red-700",
+        pagination: "bg-none hover:bg-brand-600",
       },
       size: {
         sm: "text-sm px-2.5 py-1",

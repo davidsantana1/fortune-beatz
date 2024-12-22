@@ -18,7 +18,7 @@ import { useTranslation } from "react-i18next";
 
 function SalesChart() {
   const { t } = useTranslation();
-  const { sales, isPending, error } = useSales();
+  const { sales, isPending, error } = useSales(true);
   const data = [];
 
   // Create a Map to store total sales per date
