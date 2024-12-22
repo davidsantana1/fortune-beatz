@@ -6,7 +6,7 @@ function NavItem({ to, title, icon, ...props }) {
   return (
     <li className="w-full" {...props}>
       <NavLink
-        className="flex w-full items-center justify-center gap-3 rounded-md px-12 py-2 transition-all hover:bg-brand-975"
+        className="flex w-full items-center gap-3 rounded-md px-12 py-2 transition-all hover:bg-brand-975"
         to={to}
       >
         {cloneElement(icon, {

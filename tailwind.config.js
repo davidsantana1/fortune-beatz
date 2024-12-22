@@ -1,3 +1,5 @@
+import { BRAND_COLORS } from "./src/utils/constants";
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -19,20 +21,7 @@ export default {
       },
       colors: {
         brand: {
-          50: "#eefaff",
-          100: "#d8f3ff",
-          200: "#b9e9ff",
-          300: "#89deff",
-          400: "#52caff",
-          500: "#2aacff",
-          600: "#138ffd",
-          700: "#0c79ef",
-          800: "#115ebc",
-          900: "#145194",
-          950: "#11325a",
-          965: "#0d344c",
-          975: "#082233",
-          999: "#041119",
+          ...BRAND_COLORS,
         },
       },
     },

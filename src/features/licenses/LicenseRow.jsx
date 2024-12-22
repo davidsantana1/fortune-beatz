@@ -31,7 +31,9 @@ function LicenseRow({ license, number }) {
 
   return (
     <tr>
-      <TableItem as="td">{number}</TableItem>
+      <TableItem as="td">
+        <p className="w-[1.25rem] font-semibold group-hover:hidden">{number}</p>
+      </TableItem>
       <TableItem as="td">{name}</TableItem>
       <TableItem as="td">{USDollar.format(price)}</TableItem>
       <TableItem className="text-center" as="td">

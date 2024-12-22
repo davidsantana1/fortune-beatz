@@ -1,5 +1,6 @@
 import TodaySale from "./TodaySale";
 import Error from "../../ui/Error";
+import Empty from "../../ui/Empty";
 import Spinner from "../../ui/Spinner";
 import { useSales } from "../sales/useSales";
 import { formatDate } from "../../utils/helpers";
@@ -14,13 +15,10 @@ function TodaySales() {
     (sale) => formatDate(sale.date) === formatDate(new Date()) && sale,
   );
 
+  if (todaySales.length === 0) return <Empty>No activity today...</Empty>;
+
   return (
     <ul className="flex max-h-56 flex-col gap-3 overflow-y-auto">
-      {!sales && !isPending && !error && (
-        <p className="text-xl font-medium text-brand-200">
-          No activity today...
-        </p>
-      )}
       {todaySales &&
         todaySales.map((sale) => (
           <TodaySale

@@ -1,12 +1,11 @@
 import { useForm } from "react-hook-form";
 import { useCreateLicense } from "./useCreateLicense";
-import { HiMiniPlusCircle, HiPencil } from "react-icons/hi2";
-import Heading from "../../ui/Heading";
-import Button from "../../ui/Button";
 import FormRow from "../../ui/FormRow";
 import { useUpdateLicenses } from "./useUpdateLicenses";
 import { useLicenses } from "./useLicenses";
 import toast from "react-hot-toast";
+import Form from "../../ui/Form";
+import TwoColsInput from "../../ui/TwoColsInput";
 
 function CreateLicenseForm({ isEditSession = false, license, onCloseModal }) {
   const {
@@ -59,98 +58,95 @@ function CreateLicenseForm({ isEditSession = false, license, onCloseModal }) {
   }
 
   return (
-    <>
-      <form
-        id="create-license-form"
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex max-h-[35rem] flex-col overflow-y-scroll"
-      >
-        <Heading size="md">
-          <div className="flex items-center gap-3 text-xl sm:text-3xl">
-            {isEditSession ? <HiPencil /> : <HiMiniPlusCircle size="1.6rem" />}
-            {isEditSession ? "Edit" : "Create"} License
-          </div>
-        </Heading>
-        <FormRow
-          disabled={isWorking}
-          errors={errors}
-          register={register}
-          label="Name"
-          id="name"
-          placeholder="Basic"
-          inputType="text"
-        />
-        <FormRow
-          disabled={isWorking}
-          errors={errors}
-          register={register}
-          label="Price"
-          id="price"
-          placeholder="19.99"
-          inputType="number"
-          inputStep="0.01"
-        />
+    <Form
+      isEditSession={isEditSession}
+      formName="License"
+      onSubmit={onSubmit}
+      handleSubmit={handleSubmit}
+      isWorking={isWorking}
+      formId="create-license-form"
+    >
+      <TwoColsInput>
+        <TwoColsInput.Col>
+          <FormRow
+            disabled={isWorking}
+            errors={errors}
+            register={register}
+            label="Name"
+            id="name"
+            placeholder="Basic"
+            inputType="text"
+          />
+          <FormRow
+            disabled={isWorking}
+            errors={errors}
+            register={register}
+            label="Price"
+            id="price"
+            placeholder="19.99"
+            inputType="number"
+            inputStep="0.01"
+          />
 
-        <FormRow
-          disabled={isWorking}
-          errors={errors}
-          register={register}
-          label="Allowed Music Videos"
-          id="musicVideos"
-          placeholder="1"
-          inputType="number"
-        />
+          <FormRow
+            disabled={isWorking}
+            errors={errors}
+            register={register}
+            label="Allowed Music Videos"
+            id="musicVideos"
+            placeholder="1"
+            inputType="number"
+          />
 
-        <FormRow
-          disabled={isWorking}
-          errors={errors}
-          register={register}
-          label="Allowed Copies"
-          id="allowedCopies"
-          placeholder="20000"
-          inputType="number"
-        />
+          <FormRow
+            disabled={isWorking}
+            errors={errors}
+            register={register}
+            label="Allowed Copies"
+            id="allowedCopies"
+            placeholder="20000"
+            inputType="number"
+          />
+        </TwoColsInput.Col>
 
-        <FormRow
-          disabled={isWorking}
-          errors={errors}
-          register={register}
-          label="Allowed Streams"
-          id="allowedStreams"
-          placeholder="20000"
-          inputType="number"
-        />
+        <TwoColsInput.Col>
+          <FormRow
+            disabled={isWorking}
+            errors={errors}
+            register={register}
+            label="Allowed Streams"
+            id="allowedStreams"
+            placeholder="20000"
+            inputType="number"
+          />
 
-        <FormRow
-          disabled={isWorking}
-          isSelect={true}
-          errors={errors}
-          register={register}
-          label="Allow Profit Live Performance"
-          id="forProfitLivePerformance"
-        />
+          <FormRow
+            disabled={isWorking}
+            isSelect={true}
+            errors={errors}
+            register={register}
+            label="Allow Profit Live Performance"
+            id="forProfitLivePerformance"
+          >
+            <option value="" disabled>
+              --- Select an option ---
+            </option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </FormRow>
 
-        <FormRow
-          disabled={isWorking}
-          placeholder="1"
-          errors={errors}
-          register={register}
-          label="Allowed Radio Stations"
-          id="allowedRadioStations"
-          inputType="number"
-        />
-      </form>
-      <div className="mt-4 flex">
-        <Button
-          type="submit"
-          form="create-license-form"
-          size="lg"
-          align="right"
-        >
-          {isEditSession ? "Edit" : "Create"}
-        </Button>
-      </div>
-    </>
+          <FormRow
+            disabled={isWorking}
+            placeholder="1"
+            errors={errors}
+            register={register}
+            label="Allowed Radio Stations"
+            id="allowedRadioStations"
+            inputType="number"
+          />
+        </TwoColsInput.Col>
+      </TwoColsInput>
+    </Form>
   );
 }
 

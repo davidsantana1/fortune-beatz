@@ -3,7 +3,7 @@ import TodaySales from "../sales/TodaySales";
 
 function TodayActivity() {
   return (
-    <div className="h-80 rounded-md bg-brand-950 p-6">
+    <div className="h-80 rounded-md bg-brand-900 p-6">
       <Heading size="sm" as="h2">
         Today
       </Heading>

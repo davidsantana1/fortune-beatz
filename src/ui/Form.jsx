@@ -1,0 +1,45 @@
+import { HiMiniPlusCircle, HiPencil } from "react-icons/hi2";
+import Heading from "./Heading";
+import Button from "./Button";
+import SpinnerMini from "./SpinnerMini";
+
+function Form({
+  isEditSession = false,
+  formName,
+  onSubmit,
+  handleSubmit,
+  isWorking,
+  formId,
+  children,
+}) {
+  return (
+    <>
+      <Heading size="md">
+        <div className="flex items-center gap-3 text-xl sm:text-3xl">
+          {isEditSession ? <HiPencil /> : <HiMiniPlusCircle size="1.6rem" />}
+          {isEditSession ? "Edit" : "Create"} {formName}
+        </div>
+      </Heading>
+      <form
+        id={formId}
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex h-[30rem] flex-col overflow-x-hidden overflow-y-scroll sm:h-auto sm:overflow-y-hidden"
+      >
+        {children}
+      </form>
+      <div className="flex">
+        <Button
+          form={formId}
+          align="right"
+          size="lg"
+          margin="top"
+          disabled={isWorking}
+        >
+          {isWorking ? <SpinnerMini /> : isEditSession ? "Edit" : "Create"}
+        </Button>
+      </div>
+    </>
+  );
+}
+
+export default Form;
