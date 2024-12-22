@@ -8,13 +8,13 @@ import { useTranslation } from "react-i18next";
 
 function BeatTable() {
   const { t } = useTranslation();
-  const { isPending, beats, error } = useBeats();
+  const { isPending, beats, error, count } = useBeats();
 
   if (isPending) return <Spinner />;
   if (error) return <Error errorMessage={error.message} />;
 
   return (
-    <Table>
+    <Table count={count}>
       <Table.Header>
         <TableItem>#</TableItem>
         <TableItem isImage={true}></TableItem>

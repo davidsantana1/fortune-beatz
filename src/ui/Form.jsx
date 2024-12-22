@@ -19,8 +19,10 @@ function Form({
       <Heading size="md">
         <div className="flex items-center gap-3 text-xl sm:text-3xl">
           {isEditSession ? <HiPencil /> : <HiMiniPlusCircle size="1.6rem" />}
-          {isEditSession ? t("formEditButton") : t("formCreateButton")}{" "}
-          <span className="capitalize">{formName}</span>
+          <div>
+            {isEditSession ? t("formEditButton") : t("formCreateButton")}{" "}
+            <span className="capitalize">{formName}</span>
+          </div>
         </div>
       </Heading>
       <form

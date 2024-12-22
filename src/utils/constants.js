@@ -1,4 +1,7 @@
 export const STORE_NAME = "Fortune Beatz";
+export const PAGE_SIZE = 4;
+export const CHANNEL_ID = "UC4QlDjmDqYNFf7-OqQKJ3Dw";
+export const YOUTUBE_KEY = import.meta.env.VITE_YOUTUBE;
 
 export const BRAND_COLORS = {
   50: "#fef2f2",
@@ -53,6 +56,3 @@ export const KEYS = [
   "G# Major",
   "G# Minor",
 ];
-
-export const CHANNEL_ID = "UC4QlDjmDqYNFf7-OqQKJ3Dw";
-export const YOUTUBE_KEY = import.meta.env.VITE_YOUTUBE;

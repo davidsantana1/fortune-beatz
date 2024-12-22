@@ -1,3 +1,5 @@
+import { PAGE_SIZE } from "./constants";
+
 export const USDollar = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
@@ -80,4 +82,12 @@ export function getStreak(dates) {
   }
 
   return streakCounter;
+}
+
+export function getPagination({ page = 0, count = 0, licenses = false }) {
+  const pageCount = Math.ceil(count / (licenses ? 5 : PAGE_SIZE));
+  const from = (page - 1) * (licenses ? 5 : PAGE_SIZE);
+  const to = from + (licenses ? 5 : PAGE_SIZE) - 1;
+
+  return { from, to, pageCount };
 }

@@ -1,14 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 import { getBeats } from "../../services/apiBeats";
+import { useCurrentPage } from "../../hooks/useCurrentPage";
+import { usePrefetchPage } from "../../hooks/usePrefetchPage";
 
 export function useBeats() {
+  const { page } = useCurrentPage();
+
   const {
     isPending,
-    data: beats,
+    data: { data: beats, count } = {},
     error,
   } = useQuery({
-    queryKey: ["beats"],
-    queryFn: getBeats,
+    queryKey: ["beats", page],
+    queryFn: () => getBeats({ page }),
   });
-  return { isPending, beats, error };
+
+  usePrefetchPage("beats", page, getBeats, count);
+
+  return { isPending, beats, error, count };
 }
