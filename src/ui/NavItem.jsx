@@ -25,7 +25,7 @@ function NavItem({
 
   return (
     <li className="w-full" {...props}>
-      <NavLink className={classes} to={to}>
+      <NavLink onClick={onClick} className={classes} to={to}>
         {cloneElement(icon, {
           className: "text-gray-400 h-[1.6rem] w-[1.6rem]",
         })}
