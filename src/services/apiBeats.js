@@ -52,13 +52,11 @@ export async function createEditBeat(newBeat, id) {
   if (error) throw new Error("Beat couldn't be created");
 
   // 2. Upload the image
-
   const { error: storageError } = await supabase.storage
     .from("beat-images")
     .upload(imageName, newBeat.image);
 
   // 2. Upload the audio
-
   const { error: storageAudioError } = await supabase.storage
     .from("beat-audios")
     .upload(audioName, newBeat.audio);

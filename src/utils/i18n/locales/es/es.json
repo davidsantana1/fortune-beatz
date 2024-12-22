@@ -1,0 +1,73 @@
+{
+  "navHome": "Inicio",
+
+  "dashboardTitle": "Tablero",
+
+  "statSales": "Ventas",
+  "statViews": "Visitas",
+
+  "statSalesStreak": "Racha de Ventas",
+  "streakMessage_one": "{{count}} día",
+  "streakMessage_other": "{{count}} días",
+
+  "todayActivityTitle": "Hoy",
+  "todayActivityEmpty": "No se han realizado ventas hoy...",
+
+  "salesSummaryTitle": "Resumen de Ventas",
+  "salesSummaryEmpty": "No se han realizado ventas...",
+
+  "salesChartTitle": "Todas Tus Ventas",
+  "totalSales": "Ventas Totales",
+
+  "beatsTitle": "Beats",
+  "beatsTableName": "Nombre",
+  "beatsTableArtistType": "Artista",
+  "beatsTableGenre": "Género",
+  "beatsTableDuration": "Duración",
+  "beatsTableKey": "Tonalidad",
+  "beatsTableButton": "Crear nuevo beat",
+
+  "beatsFormNamePlaceholder": "Nombre del Beat",
+  "beatsFormKeyPlaceholder": "Seleccionar Tonalidad",
+  "beatsFormImageLabel": "Imagen",
+  "beatsFormSuccessCreate": "Nuevo beat creado correctamente",
+  "beatsFormSuccessUpdate": "Nuevo beat actualizado correctamente",
+  "beatsFormSuccessDeleted": "Beat eliminado correctamente",
+
+  "formCreateButton": "Crear",
+  "formEditButton": "Editar",
+  "contextMenuDelete": "Eliminar",
+
+  "formRequiredMessage": "Este campo es obligatorio",
+
+  "salesTitle": "Ventas",
+  "salesTableBeatName": "Nombre del Beat",
+  "salesTableBuyer": "Comprador",
+  "salesTableDate": "Fecha",
+  "salesTableLicenseType": "Tipo de Licencia",
+  "salesTablePaymentMethod": "Método de Pago",
+  "salesTableAmount": "Monto",
+
+  "licensesTitle": "Licencias",
+  "licensesTableName": "Nombre",
+  "licensesTablePrice": "Precio",
+  "licensesTableMusicVideos": "Videos Musicales",
+  "licensesTableCopies": "Copias",
+  "licensesTableStreams": "Reproducciones",
+  "licensesTableProfitLivePerformances": "Shows con Fines de Lucro",
+  "licensesTableRadioStations": "Estaciones de Radio",
+  "licensesTableYes": "Si",
+  "licensesTableButton": "Crear nueva licencia",
+  "licensesConfirmDelete": "licencia",
+
+  "licensesFormKeyPlaceholder": "Selecciona una opción",
+  "licensesFormNamePlaceholder": "Básica",
+  "licensesFormSuccessCreate": "Nueva licencia creada correctamente",
+  "licensesFormSuccessUpdate": "Nueva licencia actualizada correctamente",
+  "licensesFormSuccessDeleted": "Licencia eliminada correctamente",
+
+  "audioPlayerNow": "En Reproducción",
+
+  "confirmDeleteMessage": "¿Estás seguro de que quieres eliminar este {{name}} permanentemente? Esta acción no se puede deshacer.",
+  "cancelButton": "Cancelar"
+}

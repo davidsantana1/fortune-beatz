@@ -1,3 +1,5 @@
+export const STORE_NAME = "Fortune Beatz";
+
 export const BRAND_COLORS = {
   50: "#fef2f2",
   100: "#fee2e2",

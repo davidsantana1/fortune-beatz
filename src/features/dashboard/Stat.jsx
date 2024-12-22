@@ -13,7 +13,9 @@ function Stat({ title, value, icon, color, isLoading }) {
           </div>
 
           <div>
-            <span className="text-xs font-bold text-brand-200">{title}</span>
+            <span className="text-xs font-bold uppercase text-brand-200">
+              {title}
+            </span>
             <p className="text-xl font-medium text-brand-50 md:text-2xl">
               {value}
             </p>

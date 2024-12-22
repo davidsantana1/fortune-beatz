@@ -4,8 +4,10 @@ import BeatRow from "./BeatRow";
 import { useBeats } from "./useBeats";
 import Spinner from "../../ui/Spinner";
 import Error from "../../ui/Error";
+import { useTranslation } from "react-i18next";
 
 function BeatTable() {
+  const { t } = useTranslation();
   const { isPending, beats, error } = useBeats();
 
   if (isPending) return <Spinner />;
@@ -16,12 +18,12 @@ function BeatTable() {
       <Table.Header>
         <TableItem>#</TableItem>
         <TableItem isImage={true}></TableItem>
-        <TableItem>Name</TableItem>
-        <TableItem>Artist Type</TableItem>
-        <TableItem>Genre</TableItem>
-        <TableItem>Time</TableItem>
+        <TableItem>{t("beatsTableName")}</TableItem>
+        <TableItem>{t("beatsTableArtistType")}</TableItem>
+        <TableItem>{t("beatsTableGenre")}</TableItem>
+        <TableItem>{t("beatsTableDuration")}</TableItem>
         <TableItem>BPM</TableItem>
-        <TableItem>Key</TableItem>
+        <TableItem>{t("beatsTableKey")}</TableItem>
         <TableItem></TableItem>
       </Table.Header>
       <Table.Body

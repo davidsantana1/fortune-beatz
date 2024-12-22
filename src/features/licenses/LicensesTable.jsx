@@ -3,8 +3,10 @@ import TableItem from "../../ui/TableItem";
 import { useLicenses } from "./useLicenses";
 import Spinner from "../../ui/Spinner";
 import LicenseRow from "./LicenseRow";
+import { useTranslation } from "react-i18next";
 
 function LicensesTable() {
+  const { t } = useTranslation();
   const { isPending, licenses } = useLicenses();
 
   if (isPending) return <Spinner />;
@@ -13,13 +15,13 @@ function LicensesTable() {
     <Table>
       <Table.Header>
         <TableItem>#</TableItem>
-        <TableItem>Name</TableItem>
-        <TableItem>Price</TableItem>
-        <TableItem>Music Videos</TableItem>
-        <TableItem>Copies</TableItem>
-        <TableItem>Streams</TableItem>
-        <TableItem>Profit Live Performances</TableItem>
-        <TableItem>Radio Stations</TableItem>
+        <TableItem>{t("licensesTableName")}</TableItem>
+        <TableItem>{t("licensesTablePrice")}</TableItem>
+        <TableItem>{t("licensesTableMusicVideos")}</TableItem>
+        <TableItem>{t("licensesTableCopies")}</TableItem>
+        <TableItem>{t("licensesTableStreams")}</TableItem>
+        <TableItem>{t("licensesTableProfitLivePerformances")}</TableItem>
+        <TableItem>{t("licensesTableRadioStations")}</TableItem>
         <TableItem></TableItem>
       </Table.Header>
       <Table.Body

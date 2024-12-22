@@ -147,7 +147,7 @@ function CreateBeatForm({
               disabled={isWorking}
               id="image"
               {...register("image", {
-                required: isEditSession ? false : "This field is required",
+                required: isEditSession ? false : "formRequiredMessage",
               })}
             />
           </div>

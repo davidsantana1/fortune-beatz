@@ -3,8 +3,10 @@ import { useAudioPlayer } from "../../context/AudioPlayerContext";
 import { HiXMark } from "react-icons/hi2";
 import { useBeats } from "../beats/useBeats";
 import "react-h5-audio-player/lib/styles.css";
+import { useTranslation } from "react-i18next";
 
 function Player() {
+  const { t } = useTranslation();
   const { currentBeat, setCurrentBeat } = useAudioPlayer();
   const { beats } = useBeats();
 
@@ -42,7 +44,7 @@ function Player() {
       {currentBeatName && (
         <div className="flex items-center justify-center py-2 text-center shadow-md">
           <p className="font-bold text-brand-50">
-            Now Playing: {currentBeatName}
+            {t("audioPlayerNow")}: {currentBeatName}
           </p>
           <HiXMark
             size={23}

@@ -14,8 +14,10 @@ import Heading from "../../ui/Heading";
 import Spinner from "../../ui/Spinner";
 import Error from "../../ui/Error";
 import { BRAND_COLORS } from "../../utils/constants";
+import { useTranslation } from "react-i18next";
 
 function SalesChart() {
+  const { t } = useTranslation();
   const { sales, isPending, error } = useSales();
   const data = [];
 
@@ -63,7 +65,7 @@ function SalesChart() {
       {sales && (
         <>
           <Heading size="sm" as="h2">
-            All Time Sales
+            {t("salesChartTitle")}
           </Heading>
           <ResponsiveContainer height={300} width="100%">
             <AreaChart data={data}>
@@ -85,7 +87,7 @@ function SalesChart() {
                 stroke={strokeColor}
                 fill={fillColor}
                 strokeWidth={2}
-                name="Total sales"
+                name={t("totalSales")}
                 unit="$"
               />
             </AreaChart>
