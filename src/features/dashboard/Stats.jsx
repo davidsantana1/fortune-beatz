@@ -16,7 +16,7 @@ import { useTranslation } from "react-i18next";
 
 function Stats() {
   const { t } = useTranslation();
-  const { beats, isPending } = useBeats();
+  const { beats, isPending } = useBeats(true);
   const { sales, isPending: isLoadingSales, error } = useSales(true);
   const { isPending: isLoadingViews, views } = useGetViews();
 

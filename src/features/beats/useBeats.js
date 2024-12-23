@@ -3,7 +3,7 @@ import { getBeats } from "../../services/apiBeats";
 import { useCurrentPage } from "../../hooks/useCurrentPage";
 import { usePrefetchPage } from "../../hooks/usePrefetchPage";
 
-export function useBeats() {
+export function useBeats(all = false) {
   const { page } = useCurrentPage();
 
   const {
@@ -11,8 +11,8 @@ export function useBeats() {
     data: { data: beats, count } = {},
     error,
   } = useQuery({
-    queryKey: ["beats", page],
-    queryFn: () => getBeats({ page }),
+    queryKey: ["beats", all ? "" : page],
+    queryFn: () => getBeats({ page: all ? -1 : page }),
   });
 
   usePrefetchPage("beats", page, getBeats, count);

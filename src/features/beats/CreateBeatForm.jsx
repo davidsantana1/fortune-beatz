@@ -8,6 +8,8 @@ import Form from "../../ui/Form";
 import TwoColsInput from "../../ui/TwoColsInput";
 import TwoColsFileInput from "../../ui/TwoColsFileInput";
 import { useTranslation } from "react-i18next";
+import Compressor from "compressorjs";
+import toast from "react-hot-toast";
 
 function CreateBeatForm({
   beatToEdit = {},
@@ -33,27 +35,52 @@ function CreateBeatForm({
 
     if (!data) return;
 
-    if (isEditSession) {
-      editBeat(
-        { newBeatData: { ...data, image, audio }, id: editId },
-        {
-          onSuccess: () => {
-            reset();
-            onCloseModal?.();
-          },
-        },
-      );
-    } else {
-      createBeat(
-        { ...data, image: image, audio: audio },
-        {
-          onSuccess: () => {
-            reset();
-            onCloseModal?.();
-          },
-        },
-      );
-    }
+    const compressImage = (file) => {
+      return new Promise((resolve, reject) => {
+        new Compressor(file, {
+          quality: 0.6,
+          convertSize: 50000,
+
+          success: (result) => resolve(result),
+          error: (err) => reject(err),
+        });
+      });
+    };
+
+    const handleSubmission = async () => {
+      try {
+        const compressedImage = image ? await compressImage(image) : null;
+        data.image = compressedImage;
+        if (isEditSession) {
+          editBeat(
+            {
+              newBeatData: { ...data, image: compressedImage, audio },
+              id: editId,
+            },
+            {
+              onSuccess: () => {
+                reset();
+                onCloseModal?.();
+              },
+            },
+          );
+        } else {
+          createBeat(
+            { ...data, image: compressedImage, audio: audio },
+            {
+              onSuccess: () => {
+                reset();
+                onCloseModal?.();
+              },
+            },
+          );
+        }
+      } catch (error) {
+        toast.error(error.message);
+      }
+    };
+
+    handleSubmission();
   }
 
   return (

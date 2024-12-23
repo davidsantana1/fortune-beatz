@@ -4,7 +4,7 @@ import supabase, { supabaseUrl } from "./supabase";
 export async function getBeats({ page }) {
   let query = supabase.from("beats").select("*", { count: "exact" });
 
-  if (page) {
+  if (page && page !== -1) {
     const { from, to } = getPagination({ page });
     query.range(from, to);
   }

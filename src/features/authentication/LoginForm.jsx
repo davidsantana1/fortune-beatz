@@ -15,9 +15,7 @@ function LoginForm() {
     login(
       { email, password },
       {
-        onSettled: () => {
-          reset();
-        },
+        onSettled: () => reset(),
       },
     );
   }
@@ -35,8 +33,8 @@ function LoginForm() {
         errors={errors}
         inputType="text"
         autoComplete="username"
-        defaultValue="david@example.com"
         disabled={isPending}
+        defaultValue="david@example.com"
       />
       <FormRow
         id="password"
@@ -46,8 +44,8 @@ function LoginForm() {
         errors={errors}
         inputType="password"
         autoComplete="current-password"
-        defaultValue="12345678"
         disabled={isPending}
+        defaultValue="12345678"
       />
 
       <Button variant="tertiary" size="lg" disabled={isPending}>
