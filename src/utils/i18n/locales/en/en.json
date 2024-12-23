@@ -72,5 +72,10 @@
   "audioPlayerNow": "Now Playing",
 
   "confirmDeleteMessage": "Are you sure you want to delete this {{name}} permanently? This action cannot be undone.",
-  "cancelButton": "Cancel"
+  "cancelButton": "Cancel",
+
+  "paginationPrev": "Previous",
+  "paginationNext": "Next",
+
+  "paginationResults": "Showing <1>{{from}}</1> to <3>{{to}}</3> of <5>{{count}}</5> results"
 }

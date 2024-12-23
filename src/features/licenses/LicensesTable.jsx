@@ -27,7 +27,7 @@ function LicensesTable() {
       <Table.Body
         data={licenses}
         render={(license, index) => (
-          <LicenseRow number={index + 1} license={license} key={license.id} />
+          <LicenseRow index={index} license={license} key={license.id} />
         )}
       />
     </Table>
