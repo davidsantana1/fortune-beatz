@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 
 function TodaySales() {
   const { t } = useTranslation();
-  const { sales, isPending, error } = useSales();
+  const { sales, isPending, error } = useSales(true);
 
   if (isPending) return <Spinner />;
   if (error) return <Error>{error.message}</Error>;

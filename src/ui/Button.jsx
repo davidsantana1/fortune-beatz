@@ -19,6 +19,7 @@ const buttonVariants = cva(
       variant: {
         primary: "bg-brand-600 hover:bg-brand-700",
         secondary: "bg-brand-500 hover:bg-brand-800",
+        tertiary: "bg-orange-500 hover:bg-orange-600",
         outline: "text-brand-100 border-2 border-brand-100 hover:bg-brand-500",
         danger: "bg-red-600 hover:bg-red-700",
         pagination: "bg-none hover:bg-brand-600",

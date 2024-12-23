@@ -5,11 +5,16 @@ import {
   HiOutlineHome,
   HiOutlineMusicalNote,
   HiOutlineDocumentText,
+  HiArrowRightOnRectangle,
 } from "react-icons/hi2";
 import LanguageSelector from "./LanguageSelector";
+import { useLogout } from "../features/authentication/useLogout";
+import SpinnerMini from "./SpinnerMini";
 
 function MainNav({ onOpen }) {
   const { t } = useTranslation();
+  const { logout, isPending } = useLogout();
+
   function handleCloseNav() {
     if (!onOpen) return;
     onOpen(false);
@@ -43,6 +48,13 @@ function MainNav({ onOpen }) {
           icon={<HiOutlineDocumentText />}
         />
         <LanguageSelector />
+
+        <NavItem
+          onClick={logout}
+          to="/logout"
+          title={t("logoutTitle")}
+          icon={isPending ? <SpinnerMini /> : <HiArrowRightOnRectangle />}
+        />
       </ul>
     </nav>
   );
