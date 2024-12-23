@@ -19,7 +19,7 @@ function LanguageSelector() {
 
   return (
     <>
-      <div>
+      <li>
         <NavItem
           onClick={(e) => {
             e.stopPropagation();
@@ -69,7 +69,7 @@ function LanguageSelector() {
             {t("navLangOptionSpanish")}
           </MenuItem>
         </Menu>
-      </div>
+      </li>
     </>
   );
 }
