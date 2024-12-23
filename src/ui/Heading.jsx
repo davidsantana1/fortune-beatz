@@ -57,6 +57,9 @@ const headingVariants = cva("", {
       none: "",
       capitalize: "capitalize",
     },
+    align: {
+      center: "text-align-center",
+    },
   },
   defaultVariants: {
     variant: "primary",

@@ -13,21 +13,21 @@ function NavItem({
   ...props
 }) {
   const classes =
-    "flex w-full items-center gap-3 rounded-md px-12 py-2 transition-all hover:bg-brand-975";
+    "flex w-full items-center gap-3 rounded-md px-12 group py-2 transition-all hover:bg-brand-975";
 
   if (langSelector)
     return (
-      <div onClick={onClick} className={`${classes} group cursor-pointer`}>
+      <div onClick={onClick} className={`${classes} cursor-pointer`}>
         <HiOutlineGlobeAlt className="h-[1.6rem] w-[1.6rem] text-gray-400 group-hover:first:stroke-brand-500" />
         {children}
       </div>
     );
 
   return (
-    <li className="w-full" {...props}>
+    <li className="group w-full" {...props}>
       <NavLink onClick={onClick} className={classes} to={to}>
         {cloneElement(icon, {
-          className: "text-gray-400 h-[1.6rem] w-[1.6rem]",
+          className: " text-gray-400 h-[1.6rem] w-[1.6rem]",
         })}
         <Heading
           as="span"

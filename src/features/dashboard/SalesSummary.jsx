@@ -27,7 +27,7 @@ const colors = [
 function SalesSummary() {
   const { t } = useTranslation();
   const { licenses, isPending: isPendingLicenses } = useLicenses();
-  const { sales, isPending: isPendingSales } = useSales();
+  const { sales, isPending: isPendingSales } = useSales(true);
 
   const prepareChartData = () => {
     if (!licenses || !sales) return [];

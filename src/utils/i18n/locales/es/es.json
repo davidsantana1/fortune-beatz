@@ -3,6 +3,7 @@
   "navLanguage": "Idioma",
   "navLangOptionSpanish": "Español",
   "navLangOptionEnglish": "Inglés",
+  "logoutTitle": "Salir",
 
   "dashboardTitle": "Tablero",
 
@@ -68,6 +69,11 @@
   "licensesFormSuccessCreate": "Nueva licencia creada correctamente",
   "licensesFormSuccessUpdate": "Nueva licencia actualizada correctamente",
   "licensesFormSuccessDeleted": "Licencia eliminada correctamente",
+
+  "loginTitle": "Iniciar Sesión",
+  "emailLabel": "Correo Electrónico",
+  "passwordLabel": "Contraseña",
+  "loginButton": "Iniciar sesión",
 
   "audioPlayerNow": "En Reproducción",
 

@@ -15,6 +15,7 @@ function FormRow({
   inputStep,
   disabled,
   children,
+  ...props
 }) {
   const { t } = useTranslation();
   return (
@@ -31,6 +32,7 @@ function FormRow({
           placeholder={placeholder}
           {...register(id, { required: t("formRequiredMessage") })}
           step={inputStep}
+          {...props}
         />
       ) : (
         <SelectInput
