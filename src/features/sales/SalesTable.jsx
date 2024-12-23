@@ -28,7 +28,7 @@ function SalesTable() {
       <Table.Body
         data={sales}
         render={(sale, index) => (
-          <SalesRow number={index + 1} sale={sale} key={sale.id} />
+          <SalesRow index={index} sale={sale} key={sale.id} />
         )}
       />
     </Table>

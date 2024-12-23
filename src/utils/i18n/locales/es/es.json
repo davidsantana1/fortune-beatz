@@ -72,5 +72,9 @@
   "audioPlayerNow": "En Reproducción",
 
   "confirmDeleteMessage": "¿Estás seguro de que quieres eliminar este {{name}} permanentemente? Esta acción no se puede deshacer.",
-  "cancelButton": "Cancelar"
+  "cancelButton": "Cancelar",
+
+  "paginationPrev": "Anterior",
+  "paginationNext": "Siguiente",
+  "paginationResults": "Mostrando <1>{{from}}</1> a <3>{{to}}</3> de <5>{{count}}</5> resultados"
 }

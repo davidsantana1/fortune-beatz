@@ -1,9 +1,12 @@
 import TableItem from "../../ui/TableItem";
 import { FaPaypal, FaRegCreditCard } from "react-icons/fa";
 import { formatDate, USDollar } from "../../utils/helpers";
+import { useRowNumber } from "../../hooks/useRowNumber";
 
-function SalesRow({ sale, number }) {
+function SalesRow({ sale, index }) {
   const { beatName, amount, buyer, date, paymentMethod, licenseType } = sale;
+  const number = useRowNumber(index);
+
   return (
     <tr>
       <TableItem as="td">

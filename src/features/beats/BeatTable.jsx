@@ -29,7 +29,7 @@ function BeatTable() {
       <Table.Body
         data={beats}
         render={(beat, index) => (
-          <BeatRow number={index + 1} beat={beat} key={beat.id} />
+          <BeatRow index={index} beat={beat} key={beat.id} />
         )}
       />
     </Table>

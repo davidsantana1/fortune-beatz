@@ -12,14 +12,18 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useAudioDuration } from "../../hooks/useAudioDuration";
 import { useTranslation } from "react-i18next";
+import { useRowNumber } from "../../hooks/useRowNumber";
+import { useSearchParams } from "react-router-dom";
 
-function BeatRow({ beat, number }) {
+function BeatRow({ beat, index }) {
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
   const { setCurrentBeat, currentBeat } = useAudioPlayer();
   const { isDeleting, deleteBeat } = useDeleteBeat();
   const { id: beatId, name, bpm, key, type, genre, image, audio } = beat;
   const { time } = useAudioDuration(audio);
+  const number = useRowNumber(index);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const isPlaying = currentBeat === audio;
   const open = Boolean(anchorEl);
@@ -121,6 +125,8 @@ function BeatRow({ beat, number }) {
               <ConfirmDelete
                 disabled={isDeleting}
                 onConfirm={() => {
+                  searchParams.set("page", 1);
+                  setSearchParams(searchParams);
                   if (audio === currentBeat) setCurrentBeat("");
                   deleteBeat(beatId);
                 }}

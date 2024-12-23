@@ -8,11 +8,15 @@ import { useState } from "react";
 import CreateLicenseForm from "./CreateLicenseForm";
 import { formatNumber, USDollar } from "../../utils/helpers";
 import { useTranslation } from "react-i18next";
+import { useRowNumber } from "../../hooks/useRowNumber";
+import { useSearchParams } from "react-router-dom";
 
-function LicenseRow({ license, number }) {
+function LicenseRow({ license, index }) {
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
   const { isDeleting, deleteLicense } = useDeleteLicense();
+  const number = useRowNumber(index, true);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const open = Boolean(anchorEl);
 
@@ -91,7 +95,11 @@ function LicenseRow({ license, number }) {
           <Modal.Window name="delete">
             <ConfirmDelete
               disabled={isDeleting}
-              onConfirm={() => deleteLicense(id)}
+              onConfirm={() => {
+                searchParams.set("page", 1);
+                setSearchParams(searchParams);
+                deleteLicense(id);
+              }}
               itemType={t("licensesConfirmDelete")}
             />
           </Modal.Window>

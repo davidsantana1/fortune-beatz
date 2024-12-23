@@ -4,8 +4,10 @@ import Button from "./Button";
 import { PAGE_SIZE } from "../utils/constants";
 import { useCurrentPage } from "../hooks/useCurrentPage";
 import { getPagination } from "../utils/helpers";
+import { Trans, useTranslation } from "react-i18next";
 
 function Pagination({ count, licenses = false }) {
+  const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
   const { page: currentPage } = useCurrentPage();
 
@@ -27,16 +29,16 @@ function Pagination({ count, licenses = false }) {
 
   if (pageCount <= 1) return null;
 
+  const from = (currentPage - 1) * PAGE_SIZE + 1;
+  const to = currentPage === pageCount ? count : currentPage * PAGE_SIZE;
+
   return (
     <div className="flex items-center justify-between bg-brand-800 px-5 py-3 font-semibold text-brand-50">
       <p>
-        Showing{" "}
-        <PaginationNumber>{(currentPage - 1) * PAGE_SIZE + 1}</PaginationNumber>{" "}
-        to{" "}
-        <PaginationNumber>
-          {currentPage === pageCount ? count : currentPage * PAGE_SIZE}
-        </PaginationNumber>{" "}
-        of <PaginationNumber>{count}</PaginationNumber> results
+        {/* prettier-ignore */}
+        <Trans i18nKey={"paginationResults"}  count={count}>
+        Showing <PaginationNumber>{{from}}</PaginationNumber> to <PaginationNumber>{{to}}</PaginationNumber> of <PaginationNumber>{count}</PaginationNumber> results
+        </Trans>
       </p>
 
       <div className="flex gap-4">
@@ -46,7 +48,8 @@ function Pagination({ count, licenses = false }) {
           variant="pagination"
         >
           <div className="flex items-center gap-2">
-            <HiChevronLeft /> <span className="hidden sm:flex">Previous</span>
+            <HiChevronLeft />{" "}
+            <span className="hidden sm:flex">{t("paginationPrev")}</span>
           </div>
         </Button>
         <Button
@@ -55,7 +58,7 @@ function Pagination({ count, licenses = false }) {
           variant="pagination"
         >
           <div className="flex items-center gap-2">
-            <span className="hidden sm:flex">Next</span>
+            <span className="hidden sm:flex">{t("paginationNext")}</span>
             <HiChevronRight />
           </div>
         </Button>
