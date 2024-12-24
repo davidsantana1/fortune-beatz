@@ -10,6 +10,7 @@ import { PAGE_SIZE } from "../../utils/constants";
 
 import ForwardIcon from "./ForwardIcon";
 import RewindIcon from "./RewindIcon";
+import toast from "react-hot-toast";
 
 const calculatePlayingIndex = (beats, nowPlaying) =>
   beats?.findIndex((beat) => beat.audio === nowPlaying) + 1 || 0;
@@ -42,10 +43,15 @@ function Player() {
       const nextBeats = getCachedBeats(nextPage);
 
       if (nextBeats?.length) {
+        console.log("LOG");
+
         changePage(1);
+        if (nextBeats.at(0) === currentBeat)
+          toast.error("No more beats available");
         setCurrentBeat(nextBeats.at(0));
       } else {
         const nextIndex = playingIndex % beats.length;
+
         setCurrentBeat(beats[nextIndex]);
       }
     } else {
