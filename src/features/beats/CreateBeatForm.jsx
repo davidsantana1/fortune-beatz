@@ -8,8 +8,11 @@ import Form from "../../ui/Form";
 import TwoColsInput from "../../ui/TwoColsInput";
 import TwoColsFileInput from "../../ui/TwoColsFileInput";
 import { useTranslation } from "react-i18next";
-import Compressor from "compressorjs";
 import toast from "react-hot-toast";
+import GoogleDrivePicker from "./GoogleDrivePicker";
+import Label from "../../ui/Label";
+import { useState } from "react";
+import { useEffect } from "react";
 
 function CreateBeatForm({
   beatToEdit = {},
@@ -19,6 +22,10 @@ function CreateBeatForm({
   const { t } = useTranslation();
   const { isCreating, createBeat } = useCreateBeat();
   const { isEditing, editBeat } = useEditBeat();
+  const [wavUploaded, setWavUploaded] = useState("");
+  const [mp3Uploaded, setMp3Uploaded] = useState("");
+  const [stemsUploaded, setStemsUploaded] = useState("");
+
   const isWorking = isCreating || isEditing;
   const { id: editId } = beatToEdit;
 
@@ -29,32 +36,56 @@ function CreateBeatForm({
     reset,
   } = useForm({ defaultValues: isEditSession ? { ...beatToEdit } : {} });
 
+  useEffect(() => {}, []);
+
+  function onWavSelected(data) {
+    if (data.fileType !== "WAV") return;
+    setWavUploaded(data);
+  }
+
+  function onMp3Selected(data) {
+    if (data.fileType !== "MP3") return;
+    setMp3Uploaded(data);
+  }
+
+  function onStemsSelected(data) {
+    if (data.fileType !== "STEMS") return;
+    setStemsUploaded(data);
+  }
+
   function onSubmit(data) {
+    if (!isEditSession) {
+      if (!wavUploaded || !wavUploaded.docs.at(0).url) {
+        toast.error("No Wav File Uploaded");
+        return;
+      }
+
+      if (!stemsUploaded || !stemsUploaded.docs.at(0).url) {
+        toast.error("No STEMS File Uploaded");
+        return;
+      }
+
+      if (!mp3Uploaded || !mp3Uploaded.docs.at(0).url) {
+        toast.error("No MP3 File Uploaded");
+        return;
+      }
+
+      data.driveWav = wavUploaded?.docs?.at(0)?.url;
+      data.driveMp3 = mp3Uploaded?.docs?.at(0)?.url;
+      data.driveStems = stemsUploaded?.docs?.at(0)?.url;
+    }
+
     const image = typeof data.image === "string" ? data.image : data.image[0];
     const audio = typeof data.audio === "string" ? data.audio : data.audio[0];
 
     if (!data) return;
 
-    const compressImage = (file) => {
-      return new Promise((resolve, reject) => {
-        new Compressor(file, {
-          quality: 0.6,
-          convertSize: 50000,
-
-          success: (result) => resolve(result),
-          error: (err) => reject(err),
-        });
-      });
-    };
-
     const handleSubmission = async () => {
       try {
-        const compressedImage = image ? await compressImage(image) : null;
-        data.image = compressedImage;
         if (isEditSession) {
           editBeat(
             {
-              newBeatData: { ...data, image: compressedImage, audio },
+              newBeatData: { ...data, image: image, audio },
               id: editId,
             },
             {
@@ -66,7 +97,7 @@ function CreateBeatForm({
           );
         } else {
           createBeat(
-            { ...data, image: compressedImage, audio: audio },
+            { ...data, image: image, audio: audio },
             {
               onSuccess: () => {
                 reset();
@@ -153,6 +184,27 @@ function CreateBeatForm({
               </option>
             ))}
           </FormRow>
+
+          <div className="flex items-center gap-4">
+            <Label htmlFor="untaggedBeat">{t("untaggedBeatLabel")}</Label>
+          </div>
+          <div className="flex gap-4">
+            <GoogleDrivePicker
+              onFileSelected={onWavSelected}
+              text="WAV"
+              isMissing={!isEditSession ? !wavUploaded : false}
+            />
+            <GoogleDrivePicker
+              onFileSelected={onMp3Selected}
+              text="MP3"
+              isMissing={!isEditSession ? !mp3Uploaded : false}
+            />
+            <GoogleDrivePicker
+              onFileSelected={onStemsSelected}
+              text="STEMS"
+              isMissing={!isEditSession ? !stemsUploaded : false}
+            />
+          </div>
         </TwoColsInput.Col>
       </TwoColsInput>
 
@@ -172,7 +224,7 @@ function CreateBeatForm({
 
         <TwoColsFileInput.Col>
           <FileInput
-            inputName="Beat"
+            inputName={t("beatLabel")}
             errors={errors}
             type="file"
             accept="audio/*"

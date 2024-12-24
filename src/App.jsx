@@ -15,6 +15,7 @@ import { Toaster } from "react-hot-toast";
 import { AudioPlayerProvider } from "./context/AudioPlayerContext";
 import Login from "./pages/Login";
 import ProtectedRoute from "./ui/ProtectedRoute";
+import { AuthProvider } from "./context/AuthContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,53 +28,55 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <Suspense fallback={<SpinnerFullPage />}>
-      <AudioPlayerProvider>
-        <QueryClientProvider client={queryClient}>
-          <ReactQueryDevtools initialIsOpen={false} />
-          <BrowserRouter>
-            <DynamicTitle />
-            <Routes>
-              <Route
-                element={
-                  <ProtectedRoute>
-                    <AppLayout />
-                  </ProtectedRoute>
-                }
-              >
+      <AuthProvider>
+        <AudioPlayerProvider>
+          <QueryClientProvider client={queryClient}>
+            <ReactQueryDevtools initialIsOpen={false} />
+            <BrowserRouter>
+              <DynamicTitle />
+              <Routes>
                 <Route
-                  index
-                  element={<Navigate replace to="dashboard" />}
-                ></Route>
-                <Route path="dashboard" element={<Dashboard />}></Route>
-                <Route path="beats" element={<Beats />}></Route>
-                <Route path="sales" element={<Sales />}></Route>
-                <Route path="licenses" element={<Licenses />}></Route>
-              </Route>
-              <Route path="login" element={<Login />}></Route>
-            </Routes>
-          </BrowserRouter>
-          <Toaster
-            position="top-center"
-            gutter={12}
-            containerStyle={{ margin: "8px" }}
-            toastOptions={{
-              success: {
-                duration: 3000,
-              },
-              error: {
-                duration: 5000,
-              },
-              style: {
-                fontSize: "16px",
-                maxWidth: "500px",
-                padding: "16px 24px",
-                backgroundColor: "#eefaff",
-                color: "#041119",
-              },
-            }}
-          />
-        </QueryClientProvider>
-      </AudioPlayerProvider>
+                  element={
+                    <ProtectedRoute>
+                      <AppLayout />
+                    </ProtectedRoute>
+                  }
+                >
+                  <Route
+                    index
+                    element={<Navigate replace to="dashboard" />}
+                  ></Route>
+                  <Route path="dashboard" element={<Dashboard />}></Route>
+                  <Route path="beats" element={<Beats />}></Route>
+                  <Route path="sales" element={<Sales />}></Route>
+                  <Route path="licenses" element={<Licenses />}></Route>
+                </Route>
+                <Route path="login" element={<Login />}></Route>
+              </Routes>
+            </BrowserRouter>
+            <Toaster
+              position="top-center"
+              gutter={12}
+              containerStyle={{ margin: "8px" }}
+              toastOptions={{
+                success: {
+                  duration: 3000,
+                },
+                error: {
+                  duration: 5000,
+                },
+                style: {
+                  fontSize: "16px",
+                  maxWidth: "500px",
+                  padding: "16px 24px",
+                  backgroundColor: "#eefaff",
+                  color: "#041119",
+                },
+              }}
+            />
+          </QueryClientProvider>
+        </AudioPlayerProvider>
+      </AuthProvider>
     </Suspense>
   );
 }

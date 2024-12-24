@@ -1,3 +1,4 @@
+import Compressor from "compressorjs";
 import { getPagination } from "../utils/helpers";
 import supabase, { supabaseUrl } from "./supabase";
 
@@ -59,10 +60,26 @@ export async function createEditBeat(newBeat, id) {
 
   if (error) throw new Error("Beat couldn't be created");
 
+  // Compress image
+  const compressImage = (file) => {
+    return new Promise((resolve, reject) => {
+      new Compressor(file, {
+        quality: 0.6,
+        convertSize: 50000,
+
+        success: (result) => resolve(result),
+        error: (err) => reject(err),
+      });
+    });
+  };
+
+  const compressedImage =
+    !hasImagePath && newBeat.image ? await compressImage(newBeat.image) : null;
+
   // 2. Upload the image
   const { error: storageError } = await supabase.storage
     .from("beat-images")
-    .upload(imageName, newBeat.image);
+    .upload(imageName, compressedImage);
 
   // 2. Upload the audio
   const { error: storageAudioError } = await supabase.storage
