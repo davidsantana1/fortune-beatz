@@ -83,5 +83,8 @@
   "paginationPrev": "Previous",
   "paginationNext": "Next",
 
-  "paginationResults": "Showing <1>{{from}}</1> to <3>{{to}}</3> of <5>{{reCount}}</5> results"
+  "paginationResults": "Showing <1>{{from}}</1> to <3>{{to}}</3> of <5>{{reCount}}</5> results",
+
+  "untaggedBeatLabel": "Untagged Beat",
+  "beatLabel": "Tagged Beat"
 }

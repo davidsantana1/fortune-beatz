@@ -16,7 +16,7 @@ import { useTranslation } from "react-i18next";
 
 function Stats() {
   const { t } = useTranslation();
-  const { beats, isPending } = useBeats(true);
+  const { count, isPending } = useBeats(true);
   const { sales, isPending: isLoadingSales, error } = useSales(true);
   const { isPending: isLoadingViews, views } = useGetViews();
 
@@ -35,7 +35,7 @@ function Stats() {
       <Stat
         title="Beats"
         color="bg-orange-700 text-orange-300"
-        value={beats?.length}
+        value={count}
         icon={<HiMusicalNote />}
         isLoading={isPending}
       />
