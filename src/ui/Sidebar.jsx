@@ -16,7 +16,7 @@ function Sidebar() {
         </Heading>
         <MainNav />
       </div>
-      <div className="sticky flex flex-col items-center justify-center gap-4 bg-brand-999 p-2 shadow-md lg:hidden">
+      <div className="fixed left-0 top-0 z-[54] flex w-full flex-col items-center justify-center gap-4 bg-brand-999 p-2 shadow-md lg:hidden">
         <div className="grid w-full grid-cols-3 items-center px-6">
           <div
             className="cursor-pointer justify-start text-brand-50 transition-all hover:text-brand-500"
