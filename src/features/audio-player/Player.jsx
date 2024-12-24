@@ -1,105 +1,106 @@
 import AudioPlayer from "react-h5-audio-player";
-import { useAudioPlayer } from "../../context/AudioPlayerContext";
-import { HiXMark } from "react-icons/hi2";
-import { useBeats } from "../beats/useBeats";
 import "react-h5-audio-player/lib/styles.css";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useAudioPlayer } from "../../context/AudioPlayerContext";
+import { useBeats } from "../beats/useBeats";
+
+import { HiXMark } from "react-icons/hi2";
+import { PAGE_SIZE } from "../../utils/constants";
+
+import ForwardIcon from "./ForwardIcon";
+import RewindIcon from "./RewindIcon";
+
+const calculatePlayingIndex = (beats, nowPlaying) =>
+  beats?.findIndex((beat) => beat.audio === nowPlaying) + 1 || 0;
+
+const getPageNumber = (searchParams) => Number(searchParams.get("page")) || 1;
 
 function Player() {
   const { t } = useTranslation();
-  const { currentBeat, setCurrentBeat } = useAudioPlayer();
-  const { beats } = useBeats();
 
-  if (currentBeat === "") return null;
+  const { currentBeat, setCurrentBeat, nowPlaying } = useAudioPlayer();
+  const { beats, getCachedBeats } = useBeats();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
 
-  let playingIndex;
-  let currentBeatName;
+  const playingIndex = calculatePlayingIndex(beats, nowPlaying);
+  const isLastBeatInPage = playingIndex % PAGE_SIZE === 0;
+  const isFirstBeatInPage = playingIndex === 1;
 
-  if (beats) {
-    playingIndex = beats.findIndex((beat) => beat.audio === currentBeat);
-    currentBeatName =
-      beats?.find((beat) => beat?.audio === currentBeat)?.name ?? "";
-  }
-
-  function playNext() {
-    let nextIndex = playingIndex + 1;
-
-    if (beats.length === nextIndex) {
-      nextIndex = 0;
+  const changePage = (offset) => {
+    if (location.pathname === "/beats" && beats && nowPlaying !== "") {
+      const currentPage = getPageNumber(searchParams) + offset;
+      searchParams.set("page", currentPage);
+      setSearchParams(searchParams);
     }
-    setCurrentBeat(beats.at(nextIndex).audio);
-  }
+  };
 
-  function playPrevious() {
-    let prevIndex = playingIndex - 1;
+  const handlePlayNext = () => {
+    if (isLastBeatInPage) {
+      const nextPage = getPageNumber(searchParams) + 1;
+      const nextBeats = getCachedBeats(nextPage);
 
-    if (prevIndex === 0) {
-      prevIndex = beats.at(-1);
+      if (nextBeats?.length) {
+        changePage(1);
+        setCurrentBeat(nextBeats.at(0));
+      } else {
+        const nextIndex = playingIndex % beats.length;
+        setCurrentBeat(beats[nextIndex]);
+      }
+    } else {
+      const nextIndex = playingIndex % beats.length;
+      setCurrentBeat(beats[nextIndex]);
     }
-    setCurrentBeat(beats.at(prevIndex).audio);
-  }
+  };
+
+  const handlePlayPrevious = () => {
+    if (getPageNumber(searchParams) === 1 && currentBeat === beats.at(0))
+      return;
+    if (isFirstBeatInPage && getPageNumber(searchParams) > 1) {
+      const previousPage = getPageNumber(searchParams) - 1;
+      changePage(-1);
+
+      const previousBeats = getCachedBeats(previousPage);
+
+      if (previousBeats?.length) {
+        setCurrentBeat(previousBeats.at(-1));
+      }
+    } else {
+      const prevIndex = (playingIndex - 2 + beats.length) % beats.length;
+      if (prevIndex >= 0) setCurrentBeat(beats[prevIndex]);
+    }
+  };
+
+  if (!nowPlaying) return null;
 
   return (
     <div className="fixed bottom-0 left-0 z-50 w-full bg-brand-900">
-      {currentBeatName && (
+      {currentBeat?.name && (
         <div className="flex items-center justify-center py-2 text-center shadow-md">
           <p className="font-bold text-brand-50">
-            {t("audioPlayerNow")}: {currentBeatName}
+            {t("audioPlayerNow")}: {currentBeat?.name}
           </p>
           <HiXMark
             size={23}
             className="absolute right-4 cursor-pointer text-brand-50 transition-all hover:text-red-500"
-            onClick={() => setCurrentBeat("")}
+            onClick={() => setCurrentBeat(null)}
           />
         </div>
       )}
       <AudioPlayer
         autoPlay
-        onEnded={() => playNext()}
-        src={currentBeat}
+        onEnded={handlePlayNext}
+        src={nowPlaying}
         showSkipControls={true}
-        onClickNext={playNext}
-        onClickPrevious={playPrevious}
+        onClickNext={handlePlayNext}
+        onClickPrevious={handlePlayPrevious}
         customIcons={{
           forward: <ForwardIcon />,
           rewind: <RewindIcon />,
         }}
       />
     </div>
-  );
-}
-
-function ForwardIcon() {
-  return (
-    <svg
-      fill="#eefaff"
-      width="800px"
-      height="800px"
-      viewBox="0 0 32 32"
-      id="icon"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path d="M26,18A10,10,0,1,1,16,8h4v5l6-6L20,1V6H16A12,12,0,1,0,28,18Z" />
-      <path d="M18.58,15.58H15.13L15,18.15H15a4.83,4.83,0,0,1,.26-.45,1.59,1.59,0,0,1,.33-.35,1.53,1.53,0,0,1,.44-.23,2,2,0,0,1,.6-.08,2.54,2.54,0,0,1,.92.16,2.06,2.06,0,0,1,.74.48,2.28,2.28,0,0,1,.5.77,2.73,2.73,0,0,1,.18,1,2.87,2.87,0,0,1-.19,1.07,2.36,2.36,0,0,1-.55.84,2.44,2.44,0,0,1-.89.55,3.23,3.23,0,0,1-1.21.2,3.79,3.79,0,0,1-.94-.11,3,3,0,0,1-.74-.32,2.45,2.45,0,0,1-.55-.45,4.13,4.13,0,0,1-.41-.55l1.06-.81.27.41a1.82,1.82,0,0,0,.34.34,1.59,1.59,0,0,0,.43.22,1.52,1.52,0,0,0,.55.08,1.29,1.29,0,0,0,1-.36,1.41,1.41,0,0,0,.33-1V19.5a1.18,1.18,0,0,0-1.28-1.27,1.44,1.44,0,0,0-.77.18,1.94,1.94,0,0,0-.48.39l-1.19-.17.29-4.31h4.52Z" />
-      <rect className="fill-none" width="32" height="32" />
-    </svg>
-  );
-}
-
-function RewindIcon() {
-  return (
-    <svg
-      fill="#000000"
-      width="800px"
-      height="800px"
-      viewBox="0 0 32 32"
-      id="icon"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path d="M4,18A12,12,0,1,0,16,6H12V1L6,7l6,6V8h4A10,10,0,1,1,6,18Z" />
-      <path d="M18.58,15.58H15.13L15,18.15H15a4.83,4.83,0,0,1,.26-.45,1.59,1.59,0,0,1,.33-.35,1.53,1.53,0,0,1,.44-.23,2,2,0,0,1,.6-.08,2.54,2.54,0,0,1,.92.16,2.06,2.06,0,0,1,.74.48,2.28,2.28,0,0,1,.5.77,2.73,2.73,0,0,1,.18,1,2.87,2.87,0,0,1-.19,1.07,2.36,2.36,0,0,1-.55.84,2.44,2.44,0,0,1-.89.55,3.23,3.23,0,0,1-1.21.2,3.79,3.79,0,0,1-.94-.11,3,3,0,0,1-.74-.32,2.45,2.45,0,0,1-.55-.45,4.13,4.13,0,0,1-.41-.55l1.06-.81.27.41a1.82,1.82,0,0,0,.34.34,1.59,1.59,0,0,0,.43.22,1.52,1.52,0,0,0,.55.08,1.29,1.29,0,0,0,1-.36,1.41,1.41,0,0,0,.33-1V19.5a1.18,1.18,0,0,0-1.28-1.27,1.44,1.44,0,0,0-.77.18,1.94,1.94,0,0,0-.48.39l-1.19-.17.29-4.31h4.52Z" />
-      <rect className="fill-none" width="32" height="32" />
-    </svg>
   );
 }
 
