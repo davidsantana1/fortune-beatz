@@ -18,14 +18,14 @@ import { useSearchParams } from "react-router-dom";
 function BeatRow({ beat, index }) {
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
-  const { setCurrentBeat, currentBeat } = useAudioPlayer();
+  const { setCurrentBeat, nowPlaying } = useAudioPlayer();
   const { isDeleting, deleteBeat } = useDeleteBeat();
   const { id: beatId, name, bpm, key, type, genre, image, audio } = beat;
   const { time } = useAudioDuration(audio);
   const number = useRowNumber(index);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const isPlaying = currentBeat === audio;
+  const isPlaying = nowPlaying === audio;
   const open = Boolean(anchorEl);
 
   function handleClose() {
@@ -41,9 +41,9 @@ function BeatRow({ beat, index }) {
       return;
     }
 
-    if (audio === currentBeat) setCurrentBeat("a");
+    if (audio === nowPlaying) setCurrentBeat(null);
     setTimeout(() => {
-      setCurrentBeat(audio);
+      setCurrentBeat(beat);
     }, 0);
   }
 
@@ -127,7 +127,7 @@ function BeatRow({ beat, index }) {
                 onConfirm={() => {
                   searchParams.set("page", 1);
                   setSearchParams(searchParams);
-                  if (audio === currentBeat) setCurrentBeat("");
+                  if (audio === nowPlaying) setCurrentBeat(null);
                   deleteBeat(beatId);
                 }}
                 itemType="beat"

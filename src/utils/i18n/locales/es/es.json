@@ -82,5 +82,5 @@
 
   "paginationPrev": "Anterior",
   "paginationNext": "Siguiente",
-  "paginationResults": "Mostrando <1>{{from}}</1> a <3>{{to}}</3> de <5>{{count}}</5> resultados"
+  "paginationResults": "Mostrando <1>{{from}}</1> a <3>{{to}}</3> de <5>{{reCount}}</5> resultados"
 }

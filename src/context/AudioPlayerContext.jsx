@@ -1,12 +1,24 @@
+import { useEffect } from "react";
 import { useContext, createContext, useState } from "react";
 
 const AudioPlayerContext = createContext();
 
 function AudioPlayerProvider({ children }) {
-  const [currentBeat, setCurrentBeat] = useState("");
+  const [currentBeat, setCurrentBeat] = useState(null);
+  const [nowPlaying, setNowPlaying] = useState("");
+
+  useEffect(() => {
+    if (currentBeat) {
+      setNowPlaying(currentBeat.audio || "");
+    } else {
+      setNowPlaying("");
+    }
+  }, [currentBeat]);
 
   return (
-    <AudioPlayerContext.Provider value={{ currentBeat, setCurrentBeat }}>
+    <AudioPlayerContext.Provider
+      value={{ currentBeat, setCurrentBeat, nowPlaying }}
+    >
       {children}
     </AudioPlayerContext.Provider>
   );

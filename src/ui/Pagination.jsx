@@ -31,13 +31,14 @@ function Pagination({ count, licenses = false }) {
 
   const from = (currentPage - 1) * PAGE_SIZE + 1;
   const to = currentPage === pageCount ? count : currentPage * PAGE_SIZE;
+  const reCount = count;
 
   return (
     <div className="flex items-center justify-between bg-brand-800 px-5 py-3 font-semibold text-brand-50">
       <p>
         {/* prettier-ignore */}
-        <Trans i18nKey={"paginationResults"}  count={count}>
-        Showing <PaginationNumber>{{from}}</PaginationNumber> to <PaginationNumber>{{to}}</PaginationNumber> of <PaginationNumber>{count}</PaginationNumber> results
+        <Trans i18nKey={"paginationResults"}  >
+        Showing <PaginationNumber>{{from}}</PaginationNumber> to <PaginationNumber>{{to}}</PaginationNumber> of <PaginationNumber>{{reCount}}</PaginationNumber> results
         </Trans>
       </p>
 
