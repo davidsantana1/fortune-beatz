@@ -96,6 +96,6 @@ a.active svg {
   @apply h-8 w-8 !fill-brand-50 hover:!fill-brand-500;
 }
 
-.css-1tktgsa-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
-  @apply !bg-brand-900 !text-brand-50;
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.MuiMenu-paper.MuiMenu-paper.css-1tktgsa-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
+  @apply !absolute !z-[9999] !bg-brand-900 !text-brand-50;
 }

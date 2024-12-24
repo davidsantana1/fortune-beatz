@@ -15,23 +15,25 @@ function SalesTable() {
   if (error) return <Error />;
 
   return (
-    <Table count={count}>
-      <Table.Header>
-        <TableItem>#</TableItem>
-        <TableItem>{t("salesTableBeatName")}</TableItem>
-        <TableItem>{t("salesTableBuyer")}</TableItem>
-        <TableItem>{t("salesTableDate")}</TableItem>
-        <TableItem>{t("salesTableLicenseType")}</TableItem>
-        <TableItem>{t("salesTablePaymentMethod")}</TableItem>
-        <TableItem>{t("salesTableAmount")}</TableItem>
-      </Table.Header>
-      <Table.Body
-        data={sales}
-        render={(sale, index) => (
-          <SalesRow index={index} sale={sale} key={sale.id} />
-        )}
-      />
-    </Table>
+    <div className="pb-24">
+      <Table count={count}>
+        <Table.Header>
+          <TableItem>#</TableItem>
+          <TableItem>{t("salesTableBeatName")}</TableItem>
+          <TableItem>{t("salesTableBuyer")}</TableItem>
+          <TableItem>{t("salesTableDate")}</TableItem>
+          <TableItem>{t("salesTableLicenseType")}</TableItem>
+          <TableItem>{t("salesTablePaymentMethod")}</TableItem>
+          <TableItem>{t("salesTableAmount")}</TableItem>
+        </Table.Header>
+        <Table.Body
+          data={sales}
+          render={(sale, index) => (
+            <SalesRow index={index} sale={sale} key={sale.id} />
+          )}
+        />
+      </Table>
+    </div>
   );
 }
 

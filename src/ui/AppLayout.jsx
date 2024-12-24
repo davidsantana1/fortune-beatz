@@ -4,7 +4,7 @@ import Player from "../features/audio-player/Player";
 
 function AppLayout() {
   return (
-    <div className="h-screen w-screen grid-cols-[1fr_5fr] overflow-x-hidden lg:grid">
+    <div className="h-screen w-screen grid-cols-[1fr_5fr] overflow-y-scroll lg:grid">
       <Sidebar />
       <main>
         <Container>
@@ -18,7 +18,9 @@ function AppLayout() {
 
 function Container({ children }) {
   return (
-    <div className="min-h-screen bg-brand-950 p-6 md:p-14">{children}</div>
+    <div className="mt-16 min-h-screen bg-brand-950 p-6 md:p-14 lg:mt-0">
+      {children}
+    </div>
   );
 }
 

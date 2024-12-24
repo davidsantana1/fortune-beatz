@@ -6,15 +6,17 @@ import Modal from "../../ui/Modal";
 function AddBeat() {
   const { t } = useTranslation();
   return (
-    <Modal>
-      <Modal.Open opens="create">
-        <Button size="lg">{t("beatsTableButton")}</Button>
-      </Modal.Open>
+    <div className="pb-32">
+      <Modal>
+        <Modal.Open opens="create">
+          <Button size="lg">{t("beatsTableButton")}</Button>
+        </Modal.Open>
 
-      <Modal.Window name="create">
-        <CreateBeatForm />
-      </Modal.Window>
-    </Modal>
+        <Modal.Window name="create">
+          <CreateBeatForm />
+        </Modal.Window>
+      </Modal>
+    </div>
   );
 }
 
