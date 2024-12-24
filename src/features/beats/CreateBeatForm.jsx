@@ -188,7 +188,7 @@ function CreateBeatForm({
           <div className="flex items-center gap-4">
             <Label htmlFor="untaggedBeat">{t("untaggedBeatLabel")}</Label>
           </div>
-          <div className="flex gap-4">
+          <div className="mb-4 grid grid-cols-2 gap-2 xl:flex xl:gap-4">
             <GoogleDrivePicker
               onFileSelected={onWavSelected}
               text="WAV"
