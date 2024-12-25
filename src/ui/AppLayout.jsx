@@ -26,7 +26,7 @@ function AppLayout() {
 
 function Container({ children }) {
   return (
-    <div className="min-h-screen bg-brand-950 p-6 md:p-14 lg:mt-0">
+    <div className="min-h-screen bg-brand-950 p-6 pb-64 md:p-14 lg:mt-0">
       {children}
     </div>
   );
