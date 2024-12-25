@@ -1,6 +1,4 @@
-// import { useEffect } from "react";
 import useDrivePicker from "react-google-drive-picker";
-import { DRIVE_API_KEY, DRIVE_CLIENT_ID } from "../../utils/constants";
 import { useAuth } from "../../context/AuthContext";
 import { useEffect } from "react";
 import { HiMiniCheckCircle, HiMiniExclamationCircle } from "react-icons/hi2";
@@ -18,8 +16,8 @@ function GoogleDrivePicker({ text, onFileSelected, isMissing }) {
 
   const handleOpenPicker = () => {
     openPicker({
-      clientId: DRIVE_CLIENT_ID,
-      developerKey: DRIVE_API_KEY,
+      clientId: import.meta.env.VITE_DRIVE_CLIENT_ID,
+      developerKey: import.meta.env.VITE_DRIVE,
       viewId: "DOCS",
       token: authResponse?.access_token ?? authToken,
       supportDrives: true,

@@ -86,5 +86,7 @@
   "paginationResults": "Showing <1>{{from}}</1> to <3>{{to}}</3> of <5>{{reCount}}</5> results",
 
   "untaggedBeatLabel": "Untagged Beat",
-  "beatLabel": "Tagged Beat"
+  "beatLabel": "Tagged Beat",
+  "demoTitle": "Data mutations (create, update, delete) are deactivated in this demo app.",
+  "logInDemo": "Any credentials will work in this demo app."
 }

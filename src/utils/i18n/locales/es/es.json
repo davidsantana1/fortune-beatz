@@ -84,5 +84,7 @@
   "paginationNext": "Siguiente",
   "paginationResults": "Mostrando <1>{{from}}</1> a <3>{{to}}</3> de <5>{{reCount}}</5> resultados",
   "untaggedBeatLabel": "Beat Sin Tags",
-  "beatLabel": "Beat Con Tags"
+  "beatLabel": "Beat Con Tags",
+  "demoTitle": "Las mutaciones de datos (crear, editar, eliminar) están desactivadas en esta versión demo.",
+  "logInDemo": "Cualquier combinación de correo y contraseña funcionará en esta versión demo."
 }

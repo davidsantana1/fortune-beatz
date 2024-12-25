@@ -13,7 +13,7 @@ import SpinnerMini from "./SpinnerMini";
 
 function MainNav({ onOpen }) {
   const { t } = useTranslation();
-  const { logout, isPending } = useLogout();
+  const { isPending } = useLogout();
 
   function handleCloseNav() {
     if (!onOpen) return;
@@ -50,8 +50,8 @@ function MainNav({ onOpen }) {
         <LanguageSelector />
 
         <NavItem
-          onClick={logout}
-          to="/logout"
+          onClick={handleCloseNav}
+          to="/login"
           title={t("logoutTitle")}
           icon={isPending ? <SpinnerMini /> : <HiArrowRightOnRectangle />}
         />

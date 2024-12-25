@@ -4,20 +4,17 @@ import Button from "../../ui/Button";
 import { useLogin } from "./useLogin";
 import SpinnerMini from "../../ui/SpinnerMini";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
   const { t } = useTranslation();
-  const { login, isPending } = useLogin();
+  const { isPending } = useLogin();
   const { formState: errors, handleSubmit, register, reset } = useForm();
+  const navigate = useNavigate();
 
-  function onSubmit({ email, password }) {
-    if (!email || !password) return;
-    login(
-      { email, password },
-      {
-        onSettled: () => reset(),
-      },
-    );
+  function onSubmit() {
+    navigate("/dashboard");
+    reset();
   }
 
   return (
@@ -34,7 +31,7 @@ function LoginForm() {
         inputType="text"
         autoComplete="username"
         disabled={isPending}
-        defaultValue="david@example.com"
+        defaultValue="mail@example.com"
       />
       <FormRow
         id="password"
@@ -45,7 +42,7 @@ function LoginForm() {
         inputType="password"
         autoComplete="current-password"
         disabled={isPending}
-        defaultValue="12345678"
+        defaultValue="VeryHardPassword1234"
       />
 
       <Button variant="tertiary" size="lg" disabled={isPending}>

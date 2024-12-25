@@ -13,7 +13,7 @@ export function useDeleteLicense() {
       toast.success(t("licensesFormSuccessDeleted"));
       queryClient.invalidateQueries({ queryKey: ["licenses"] });
     },
-    onError: (err) => toast.error(err),
+    onError: (err) => toast.error(err.message),
   });
 
   return { isDeleting, deleteLicense };

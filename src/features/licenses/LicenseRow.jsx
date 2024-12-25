@@ -9,14 +9,12 @@ import CreateLicenseForm from "./CreateLicenseForm";
 import { formatNumber, USDollar } from "../../utils/helpers";
 import { useTranslation } from "react-i18next";
 import { useRowNumber } from "../../hooks/useRowNumber";
-import { useSearchParams } from "react-router-dom";
 
 function LicenseRow({ license, index }) {
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
   const { isDeleting, deleteLicense } = useDeleteLicense();
   const number = useRowNumber(index, true);
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const open = Boolean(anchorEl);
 
@@ -25,7 +23,6 @@ function LicenseRow({ license, index }) {
     setAnchorEl(null);
   }
   const {
-    id,
     name,
     price,
     musicVideos,
@@ -96,9 +93,7 @@ function LicenseRow({ license, index }) {
             <ConfirmDelete
               disabled={isDeleting}
               onConfirm={() => {
-                searchParams.set("page", 1);
-                setSearchParams(searchParams);
-                deleteLicense(id);
+                deleteLicense();
               }}
               itemType={t("licensesConfirmDelete")}
             />
