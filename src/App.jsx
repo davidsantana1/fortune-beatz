@@ -14,7 +14,6 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { AudioPlayerProvider } from "./context/AudioPlayerContext";
 import Login from "./pages/Login";
-import ProtectedRoute from "./ui/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
 
 const queryClient = new QueryClient({
@@ -35,13 +34,7 @@ function App() {
             <BrowserRouter>
               <DynamicTitle />
               <Routes>
-                <Route
-                  element={
-                    <ProtectedRoute>
-                      <AppLayout />
-                    </ProtectedRoute>
-                  }
-                >
+                <Route element={<AppLayout />}>
                   <Route
                     index
                     element={<Navigate replace to="dashboard" />}
