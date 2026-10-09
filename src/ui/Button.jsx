@@ -1,23 +1,28 @@
 import { cva } from "class-variance-authority";
 import cn from "../utils/cn";
 
-function Button({ children, variant, size, align, ...props }) {
+function Button({ children, variant, size, align, margin, ...props }) {
   return (
-    <button className={cn(buttonVariants({ variant, size, align }))} {...props}>
+    <button
+      className={cn(buttonVariants({ variant, size, align, margin }))}
+      {...props}
+    >
       {children}
     </button>
   );
 }
 
 const buttonVariants = cva(
-  "rounded-md text-brand-50 font-medium transition-all",
+  "rounded-md text-brand-50 font-medium transition-all disabled:cursor-not-allowed",
   {
     variants: {
       variant: {
         primary: "bg-brand-600 hover:bg-brand-700",
         secondary: "bg-brand-500 hover:bg-brand-800",
+        tertiary: "bg-orange-500 hover:bg-orange-600",
         outline: "text-brand-100 border-2 border-brand-100 hover:bg-brand-500",
-        danger: "bg-red-500 hover:bg-red-600",
+        danger: "bg-red-600 hover:bg-red-700",
+        pagination: "bg-none hover:bg-brand-600",
       },
       size: {
         sm: "text-sm px-2.5 py-1",
@@ -28,11 +33,19 @@ const buttonVariants = cva(
         right: "ml-auto mr-0",
         left: "",
       },
+      margin: {
+        none: "",
+        top: "mt-4",
+        bottom: "mb-2",
+        right: "mr-2",
+        left: "ml-2",
+      },
     },
     defaultVariants: {
       variant: "primary",
       size: "md",
       align: "left",
+      padding: "none",
     },
   },
 );

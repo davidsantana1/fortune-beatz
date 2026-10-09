@@ -1,4 +1,6 @@
 import Heading from "../../ui/Heading";
+import Spinner from "../../ui/Spinner";
+import Empty from "../../ui/Empty";
 import {
   Cell,
   Legend,
@@ -7,54 +9,80 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
+import { useLicenses } from "../licenses/useLicenses";
+import { useSales } from "../sales/useSales";
+import { useTranslation } from "react-i18next";
 
-const startData = [
-  {
-    type: "Exclusiva",
-    value: 3,
-    color: "#ef4444",
-  },
-  {
-    type: "Básica",
-    value: 9,
-    color: "#22c55e",
-  },
-  {
-    type: "Premium",
-    value: 5,
-    color: "#3b82f6",
-  },
-  {
-    type: "Personalizada",
-    value: 2,
-    color: "#a855f7",
-  },
+const colors = [
+  "#ef4444",
+  "#22c55e",
+  "#3b82f6",
+  "#f97316",
+  "#eab308",
+  "#84cc16",
+  "#10b981",
+  "#64748b",
 ];
 
 function SalesSummary() {
+  const { t } = useTranslation();
+  const { licenses, isPending: isPendingLicenses } = useLicenses();
+  const { sales, isPending: isPendingSales } = useSales(true);
+
+  const prepareChartData = () => {
+    if (!licenses || !sales) return [];
+
+    const adjustedColors = colors.slice(0, licenses.length);
+
+    return licenses.map((license, index) => {
+      const quantitySold = sales.filter(
+        (sale) => sale.licenseType === license.name,
+      ).length;
+
+      return {
+        color: adjustedColors[index],
+        value: quantitySold,
+        type: license.name,
+      };
+    });
+  };
+
+  const newData = prepareChartData();
+
   return (
-    <div className="bg-brand-950 h-80 rounded-md p-6">
-      <Heading size="sm" as="h2" margin="minimal">
-        Sales Summary
-      </Heading>
-      <ResponsiveContainer width="100%" height={240}>
-        <PieChart>
-          <Pie data={startData} nameKey="type" dataKey="value" cy="45%">
-            {startData.map((entry) => (
-              <Cell fill={entry.color} stroke={entry.color} key={entry.type} />
-            ))}
-          </Pie>
-          <Legend
-            verticalAlign="middle"
-            align="right"
-            width="35%"
-            layout="vertical"
-            iconSize={15}
-            iconType="circle"
-          />
-          <Tooltip contentStyle={{ backgroundColor: "#eefaff" }} />
-        </PieChart>
-      </ResponsiveContainer>
+    <div className="h-80 rounded-md bg-brand-900 p-6">
+      {(isPendingLicenses || isPendingSales) && <Spinner />}
+      {!licenses && !isPendingLicenses && (
+        <Empty asDiv={true}>{t("salesSummaryEmpty")}</Empty>
+      )}
+      {licenses && (
+        <>
+          <Heading size="sm" as="h2" margin="minimal">
+            {t("salesSummaryTitle")}
+          </Heading>
+          <ResponsiveContainer width="100%" height={240}>
+            <PieChart>
+              <Pie data={newData} nameKey="type" dataKey="value" cy="45%">
+                {newData.map((entry) => (
+                  <Cell
+                    fill={entry.color}
+                    stroke={entry.color}
+                    key={entry.type}
+                  />
+                ))}
+              </Pie>
+              <Legend
+                verticalAlign="bottom"
+                align="center"
+                layout="horizontal"
+                iconSize={10}
+                iconType="circle"
+              />
+              <Tooltip contentStyle={{ backgroundColor: "#eefaff" }} />
+            </PieChart>
+          </ResponsiveContainer>
+        </>
+      )}
     </div>
   );
 }

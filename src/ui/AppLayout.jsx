@@ -1,14 +1,16 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
+import Player from "../features/audio-player/Player";
 
 function AppLayout() {
   return (
-    <div className="h-screen w-screen grid-cols-[1fr_5fr] overflow-x-hidden lg:grid">
+    <div className="h-screen w-screen grid-cols-[1fr_5fr] overflow-y-scroll lg:grid">
       <Sidebar />
       <main>
         <Container>
           <Outlet />
         </Container>
+        <Player />
       </main>
     </div>
   );
@@ -16,7 +18,9 @@ function AppLayout() {
 
 function Container({ children }) {
   return (
-    <div className="bg-brand-975 min-h-screen p-10 md:p-14">{children}</div>
+    <div className="mt-16 min-h-screen bg-brand-950 p-6 md:p-14 lg:mt-0">
+      {children}
+    </div>
   );
 }
 

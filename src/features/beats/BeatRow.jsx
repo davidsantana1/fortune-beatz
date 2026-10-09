@@ -1,23 +1,78 @@
 import TableItem from "../../ui/TableItem";
 import Modal from "../../ui/Modal";
-import Button from "../../ui/Button";
 import ConfirmDelete from "../../ui/ConfirmDelete";
-import { HiPencil, HiTrash } from "react-icons/hi2";
+import { HiPencil, HiTrash, HiOutlineEllipsisVertical } from "react-icons/hi2";
 import CreateBeatForm from "./CreateBeatForm";
 import { convertSecondsToMinutes } from "../../utils/helpers";
 import { useDeleteBeat } from "./useDeleteBeat";
+import { useAudioPlayer } from "../../context/AudioPlayerContext";
+import { HiPlayCircle } from "react-icons/hi2";
+import { useState } from "react";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import { useAudioDuration } from "../../hooks/useAudioDuration";
+import { useTranslation } from "react-i18next";
+import { useRowNumber } from "../../hooks/useRowNumber";
+import { useSearchParams } from "react-router-dom";
 
-function BeatRow({ beat }) {
-  const { id: beatId, name, bpm, key, type, time, genre, image } = beat;
+function BeatRow({ beat, index }) {
+  const { t } = useTranslation();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const { setCurrentBeat, nowPlaying } = useAudioPlayer();
   const { isDeleting, deleteBeat } = useDeleteBeat();
+  const { id: beatId, name, bpm, key, type, genre, image, audio } = beat;
+  const { time } = useAudioDuration(audio);
+  const number = useRowNumber(index);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const isPlaying = nowPlaying === audio;
+  const open = Boolean(anchorEl);
+
+  function handleClose() {
+    setAnchorEl(null);
+  }
+
+  function handlePlay(event) {
+    if (
+      event.target.closest("button") ||
+      event.target.closest(".modal-window") ||
+      event.target.closest(".MuiMenu-root")
+    ) {
+      return;
+    }
+
+    if (audio === nowPlaying) setCurrentBeat(null);
+    setTimeout(() => {
+      setCurrentBeat(beat);
+    }, 0);
+  }
+
   return (
-    <tr className="cursor-pointer hover:bg-brand-600">
-      <TableItem as="td" isImage={true}>
-        <img
-          className="aspect-square max-w-20 object-cover"
-          src={image}
-          alt="Beat Image"
+    <tr
+      onClick={handlePlay}
+      className={`group cursor-pointer transition-all hover:bg-brand-600 ${isPlaying && "bg-brand-600"}`}
+    >
+      <TableItem as="td">
+        {!isPlaying && (
+          <p className="w-[1.25rem] font-semibold group-hover:hidden">
+            {number}
+          </p>
+        )}
+        <HiPlayCircle
+          className={`${isPlaying ? "flex" : "hidden"} group-hover:flex`}
+          size={20}
         />
+      </TableItem>
+      <TableItem as="td" isImage={true}>
+        <div className="p-2">
+          <div className="max-w-20 overflow-hidden rounded-md">
+            <img
+              className="aspect-square max-w-20 object-cover"
+              src={image}
+              alt="Beat Image"
+            />
+          </div>
+        </div>
       </TableItem>
       <TableItem as="td">{name}</TableItem>
       <TableItem as="td">{type}</TableItem>
@@ -28,19 +83,40 @@ function BeatRow({ beat }) {
 
       <Modal>
         <TableItem as="td">
-          <div className="flex gap-4">
+          <div>
+            <HiOutlineEllipsisVertical
+              size={28}
+              className="ml-auto mr-5 text-brand-50 hover:text-brand-975"
+              onClick={(e) => {
+                e.stopPropagation();
+                setAnchorEl(e.currentTarget);
+              }}
+            />
+          </div>
+
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClick={handleClose}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
             <Modal.Open opens="edit">
-              <Button variant="secondary" size="lg">
-                <HiPencil />
-              </Button>
+              <MenuItem className="gap-2" onClick={handleClose}>
+                <HiPencil /> {t("formEditButton")}
+              </MenuItem>
             </Modal.Open>
 
             <Modal.Open opens="delete">
-              <Button variant="danger" size="lg">
-                <HiTrash />
-              </Button>
+              <MenuItem className="gap-2" onClick={handleClose}>
+                <HiTrash /> {t("contextMenuDelete")}
+              </MenuItem>
             </Modal.Open>
-
+          </Menu>
+          <div className="flex gap-4">
             <Modal.Window name="edit">
               <CreateBeatForm beatToEdit={beat} isEditSession={true} />
             </Modal.Window>
@@ -48,7 +124,12 @@ function BeatRow({ beat }) {
             <Modal.Window name="delete">
               <ConfirmDelete
                 disabled={isDeleting}
-                onConfirm={() => deleteBeat(beatId)}
+                onConfirm={() => {
+                  searchParams.set("page", 1);
+                  setSearchParams(searchParams);
+                  if (audio === nowPlaying) setCurrentBeat(null);
+                  deleteBeat(beatId);
+                }}
                 itemType="beat"
               />
             </Modal.Window>

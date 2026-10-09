@@ -1,26 +1,37 @@
 import TodaySale from "./TodaySale";
+import Error from "../../ui/Error";
+import Empty from "../../ui/Empty";
+import Spinner from "../../ui/Spinner";
+import { useSales } from "../sales/useSales";
+import { formatDate } from "../../utils/helpers";
+import { useTranslation } from "react-i18next";
 
 function TodaySales() {
+  const { t } = useTranslation();
+  const { sales, isPending, error } = useSales(true);
+
+  if (isPending) return <Spinner />;
+  if (error) return <Error>{error.message}</Error>;
+
+  const todaySales = sales.filter(
+    (sale) => formatDate(sale.date) === formatDate(new Date()) && sale,
+  );
+
+  if (todaySales.length === 0)
+    return <Empty asDiv={true}>{t("todayActivityEmpty")}.</Empty>;
+
   return (
     <ul className="flex max-h-56 flex-col gap-3 overflow-y-auto">
-      <TodaySale
-        name="Miguel Martinez"
-        flagUrl="https://em-content.zobj.net/source/apple/391/flag-dominican-republic_1f1e9-1f1f4.png"
-        price={22}
-        beatName="Sola"
-      />
-      <TodaySale
-        name="Clara Santos"
-        flagUrl="https://em-content.zobj.net/source/apple/391/flag-mexico_1f1f2-1f1fd.png"
-        price={44}
-        beatName="Incomprendida"
-      />
-      <TodaySale
-        name="Felipe Aguilar"
-        flagUrl="https://em-content.zobj.net/source/apple/391/flag-colombia_1f1e8-1f1f4.png"
-        price={55}
-        beatName="Tiempo"
-      />
+      {todaySales &&
+        todaySales.map((sale) => (
+          <TodaySale
+            key={sale.id}
+            beatName={sale.beatName}
+            name={sale.buyer}
+            price={sale.amount}
+            licenseType={sale.licenseType}
+          />
+        ))}
     </ul>
   );
 }

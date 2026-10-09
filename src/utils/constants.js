@@ -1,0 +1,61 @@
+export const STORE_NAME = "Fortune Beatz";
+export const PAGE_SIZE = 4;
+export const CHANNEL_ID = "UC4QlDjmDqYNFf7-OqQKJ3Dw";
+export const YOUTUBE_KEY = import.meta.env.VITE_YOUTUBE;
+export const DRIVE_CLIENT_ID =
+  import.meta.env.VITE_DRIVE_CLIENT_ID;
+export const DRIVE_API_KEY = import.meta.env.VITE_DRIVE;
+
+export const BRAND_COLORS = {
+  50: "#fef2f2",
+  100: "#fee2e2",
+  200: "#fecaca",
+  300: "#fca5a5",
+  400: "#f87171",
+  500: "#ef4444",
+  600: "#dc2626",
+  700: "#b91c1c",
+  800: "#991b1b",
+  900: "#7f1d1d",
+  950: "#450a0a",
+  965: "#481414",
+  975: "#300e0e",
+  999: "#180707",
+};
+
+export const KEYS = [
+  "A Major",
+  "A Minor",
+  "A# Major",
+  "A# Minor",
+  "Ab Major",
+  "Ab Minor",
+  "B Major",
+  "B Minor",
+  "Bb Major",
+  "Bb Minor",
+  "C Major",
+  "C Minor",
+  "C# Major",
+  "C# Minor",
+  "Db Major",
+  "Db Minor",
+  "D Major",
+  "D Minor",
+  "D# Major",
+  "D# Minor",
+  "Eb Major",
+  "Eb Minor",
+  "E Major",
+  "E Minor",
+  "F Major",
+  "F Minor",
+  "F# Major",
+  "F# Minor",
+  "Gb Major",
+  "Gb Minor",
+  "G Major",
+  "G Minor",
+  "G# Major",
+  "G# Minor",
+];

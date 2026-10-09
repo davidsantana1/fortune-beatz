@@ -1,75 +1,39 @@
+import Spinner from "../../ui/Spinner";
 import Table from "../../ui/Table";
 import TableItem from "../../ui/TableItem";
 import SalesRow from "./SalesRow";
-
-const fakeSales = [
-  {
-    name: "Hola",
-    price: 350,
-    date: "Oct 20 2024",
-    buyer: "Miguel Martinez",
-    licenseType: "Exclusive",
-    paymentMethod: "paypal",
-  },
-  {
-    name: "Adios",
-    price: 25,
-    date: "Nov 12 2024",
-    buyer: "Clara Perez",
-    licenseType: "Basic",
-    paymentMethod: "credit",
-  },
-
-  {
-    name: "Hola",
-    price: 55,
-    date: "Oct 20 2024",
-    buyer: "Miguel Martinez",
-    licenseType: "Premium",
-    paymentMethod: "paypal",
-  },
-  {
-    name: "Bye",
-    price: 500,
-    date: "Dec 14 2024",
-    buyer: "Michael Cruz",
-    licenseType: "Custom",
-    paymentMethod: "credit",
-  },
-  {
-    name: "Bye",
-    price: 350,
-    date: "Dec 14 2024",
-    buyer: "Michael Cruz",
-    licenseType: "Exclusive",
-    paymentMethod: "credit",
-  },
-  {
-    name: "Hola",
-    price: 25,
-    date: "Oct 20 2024",
-    buyer: "Miguel Martinez",
-    licenseType: "Basic",
-    paymentMethod: "paypal",
-  },
-];
+import Error from "../../ui/Error";
+import { useSales } from "./useSales";
+import { useTranslation } from "react-i18next";
 
 function SalesTable() {
+  const { t } = useTranslation();
+  const { sales, count, isPending, error } = useSales();
+
+  if (isPending) return <Spinner />;
+
+  if (error) return <Error />;
+
   return (
-    <Table>
-      <Table.Header>
-        <TableItem>Beat Name</TableItem>
-        <TableItem>Buyer</TableItem>
-        <TableItem>Date</TableItem>
-        <TableItem>License Type</TableItem>
-        <TableItem>Payment Method</TableItem>
-        <TableItem>Amount</TableItem>
-      </Table.Header>
-      <Table.Body
-        data={fakeSales}
-        render={(sale) => <SalesRow sale={sale} key={sale.name} />}
-      />
-    </Table>
+    <div className="pb-24">
+      <Table count={count}>
+        <Table.Header>
+          <TableItem>#</TableItem>
+          <TableItem>{t("salesTableBeatName")}</TableItem>
+          <TableItem>{t("salesTableBuyer")}</TableItem>
+          <TableItem>{t("salesTableDate")}</TableItem>
+          <TableItem>{t("salesTableLicenseType")}</TableItem>
+          <TableItem>{t("salesTablePaymentMethod")}</TableItem>
+          <TableItem>{t("salesTableAmount")}</TableItem>
+        </Table.Header>
+        <Table.Body
+          data={sales}
+          render={(sale, index) => (
+            <SalesRow index={index} sale={sale} key={sale.id} />
+          )}
+        />
+      </Table>
+    </div>
   );
 }
 

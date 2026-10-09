@@ -1,0 +1,90 @@
+{
+  "navHome": "Home",
+  "navLanguage": "Language",
+  "navLangOptionSpanish": "Spanish",
+  "navLangOptionEnglish": "English",
+  "logoutTitle": "Log Out",
+
+  "dashboardTitle": "Dashboard",
+
+  "statSales": "Sales",
+  "statViews": "Views",
+
+  "statSalesStreak": "Sales Streak",
+  "streakMessage_one": "{{count}} day",
+  "streakMessage_other": "{{count}} days",
+
+  "todayActivityTitle": "Today",
+  "todayActivityEmpty": "No activity today...",
+
+  "salesSummaryTitle": "Sales Summary",
+  "salesSummaryEmpty": "No sales have been made yet...",
+
+  "salesChartTitle": "All Time Sales",
+  "totalSales": "Total Sales",
+
+  "beatsTitle": "All Beats",
+  "beatsTableName": "Name",
+  "beatsTableArtistType": "Artist Type",
+  "beatsTableGenre": "Genre",
+  "beatsTableDuration": "Duration",
+  "beatsTableKey": "Key",
+  "beatsTableButton": "Create new beat",
+
+  "beatsFormNamePlaceholder": "Beat Name",
+  "beatsFormKeyPlaceholder": "Select a Key",
+  "beatsFormImageLabel": "Image",
+  "beatsFormSuccessCreate": "New beat successfully created",
+  "beatsFormSuccessUpdate": "New beat successfully updated",
+  "beatsFormSuccessDeleted": "Beat successfully deleted",
+
+  "formCreateButton": "Create",
+  "formEditButton": "Edit",
+  "contextMenuDelete": "Delete",
+
+  "formRequiredMessage": "This field is required",
+
+  "salesTitle": "All Sales",
+  "salesTableBeatName": "Beat Name",
+  "salesTableBuyer": "Buyer",
+  "salesTableDate": "Date",
+  "salesTableLicenseType": "License Type",
+  "salesTablePaymentMethod": "Payment Method",
+  "salesTableAmount": "Amount",
+
+  "licensesTitle": "Licenses",
+  "licensesTableName": "Name",
+  "licensesTablePrice": "Price",
+  "licensesTableMusicVideos": "Music Videos",
+  "licensesTableCopies": "Copies",
+  "licensesTableStreams": "Streams",
+  "licensesTableProfitLivePerformances": "Profit Live Performances",
+  "licensesTableRadioStations": "Radio Stations",
+  "licensesTableYes": "Yes",
+  "licensesTableButton": "Create new license",
+  "licensesConfirmDelete": "license",
+
+  "licensesFormKeyPlaceholder": "Select an option",
+  "licensesFormNamePlaceholder": "Basic",
+  "licensesFormSuccessCreate": "New license created successfully",
+  "licensesFormSuccessUpdate": "New license updated successfully",
+  "licensesFormSuccessDeleted": "License deleted successfully",
+
+  "loginTitle": "Log in to your account",
+  "emailLabel": "Email",
+  "passwordLabel": "Password",
+  "loginButton": "Log in",
+
+  "audioPlayerNow": "Now Playing",
+
+  "confirmDeleteMessage": "Are you sure you want to delete this {{name}} permanently? This action cannot be undone.",
+  "cancelButton": "Cancel",
+
+  "paginationPrev": "Previous",
+  "paginationNext": "Next",
+
+  "paginationResults": "Showing <1>{{from}}</1> to <3>{{to}}</3> of <5>{{reCount}}</5> results",
+
+  "untaggedBeatLabel": "Untagged Beat",
+  "beatLabel": "Tagged Beat"
+}

@@ -4,29 +4,33 @@ import BeatRow from "./BeatRow";
 import { useBeats } from "./useBeats";
 import Spinner from "../../ui/Spinner";
 import Error from "../../ui/Error";
+import { useTranslation } from "react-i18next";
 
 function BeatTable() {
-  const { isPending, beats, error } = useBeats();
-  console.log(error);
+  const { t } = useTranslation();
+  const { isPending, beats, error, count } = useBeats();
 
   if (isPending) return <Spinner />;
   if (error) return <Error errorMessage={error.message} />;
 
   return (
-    <Table>
+    <Table count={count}>
       <Table.Header>
+        <TableItem>#</TableItem>
         <TableItem isImage={true}></TableItem>
-        <TableItem>Name</TableItem>
-        <TableItem>Artist Type</TableItem>
-        <TableItem>Genre</TableItem>
-        <TableItem>Time</TableItem>
+        <TableItem>{t("beatsTableName")}</TableItem>
+        <TableItem>{t("beatsTableArtistType")}</TableItem>
+        <TableItem>{t("beatsTableGenre")}</TableItem>
+        <TableItem>{t("beatsTableDuration")}</TableItem>
         <TableItem>BPM</TableItem>
-        <TableItem>Key</TableItem>
-        <TableItem className="w-2">Actions</TableItem>
+        <TableItem>{t("beatsTableKey")}</TableItem>
+        <TableItem></TableItem>
       </Table.Header>
       <Table.Body
         data={beats}
-        render={(beat) => <BeatRow beat={beat} key={beat.id} />}
+        render={(beat, index) => (
+          <BeatRow index={index} beat={beat} key={beat.id} />
+        )}
       />
     </Table>
   );
